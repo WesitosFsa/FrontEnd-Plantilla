@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import '../styles/PaginaPrincipal.css';
+import '../styles/Bienvenida.css';
 import logo from '../assets/logo.png'
 
-export const PaginaPrincipal = () => {
+export const Bienvenida = () => {
   const [textos, setTextos] = useState({})
   const [modoOscuro, setModoOscuro] = useState(true);
   const [menuAbierto, setMenuAbierto] = useState(false);
@@ -16,7 +16,7 @@ export const PaginaPrincipal = () => {
   };
 
   useEffect(() => {
-    fetch("/PaginaPrincipal.xml") // Cargar el XML desde public/
+    fetch("/Bienvenida.xml") // Cargar el XML desde public/
       .then(response => response.text())
       .then(str => {
         const parser = new DOMParser();
@@ -54,14 +54,18 @@ export const PaginaPrincipal = () => {
           <div className={`collapse navbar-collapse ${menuAbierto ? "show" : ""}`} id="navbarNav">
             <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
               <li className="nav-item">
+                <Link to="/Login">
                 <button type="button" className={`${modoOscuro ? "btn btn-light mx-2" : "btn btn-dark mx-2"}`}>
                   {textos.boton1}
                 </button>
+                </Link>
               </li>
               <li className="nav-item">
+                <Link to="/Register">
                 <button type="button" className={`${modoOscuro ? "btn btn-light mx-2" : "btn btn-dark mx-2"}`}>
                   {textos.boton2}
                 </button>
+                </Link>
               </li>
               <li className="nav-item">
                 <button className={`${modoOscuro ? "btn btn-outline-light mx-2" : "btn btn-outline-dark mx-2"}`} onClick={toggleModo}>

@@ -1,0 +1,10 @@
+#formulario{
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    max-height: 800px;
+    min-height: 500px;;
+
+}

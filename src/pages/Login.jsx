@@ -1,22 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import '../styles/PaginaPrincipal.css';
 import logo from '../assets/logo.png'
+import '../styles/Login.css';
 
 export const Login = () => {
   const [textos, setTextos] = useState({})
-  const [modoOscuro, setModoOscuro] = useState(true);
-  const [menuAbierto, setMenuAbierto] = useState(false);
 
-  const toggleModo = () => {
-    setModoOscuro(!modoOscuro);
-  };
-  const toggleMenu = () => {
-    setMenuAbierto(!menuAbierto);
-  };
+
 
   useEffect(() => {
-    fetch("/PaginaPrincipal.xml") // Cargar el XML desde public/
+    fetch("/Bienvenida.xml") // Cargar el XML desde public/
       .then(response => response.text())
       .then(str => {
         const parser = new DOMParser();
@@ -24,12 +17,8 @@ export const Login = () => {
 
         // Extraer los textos
         setTextos({
-          titulo: xml.getElementsByTagName("titulo")[0].textContent,
-          descripcion: xml.getElementsByTagName("descripcion")[0].textContent,
-          boton: xml.getElementsByTagName("boton")[0].textContent,
-          boton1: xml.getElementsByTagName("boton1")[0].textContent,
-          boton2: xml.getElementsByTagName("boton2")[0].textContent
-
+          logintitulo: xml.getElementsByTagName("logintitulo")[0].textContent,
+          logintexto: xml.getElementsByTagName("logintexto")[0].textContent,
         });
       })
       .catch(error => console.error("Error cargando XML:", error));
@@ -38,45 +27,45 @@ export const Login = () => {
 
     
   return (
-    <div className={`min-vh-100 ${modoOscuro ? "bg-dark text-white" : "bg-light text-dark"}`} id="pagina-principal">
-       <nav className={`navbar navbar-expand-lg ${modoOscuro ? "bg-light text-white" : "bg-dark text-dark"} fixed-top`}>
+    <div className="min-vh-100 bg-dark text-white d-flex justify-content-center align-items-center">
+        
+        <div className="container bg-light text-dark d-flex justify-content-center align-items-center " id="formulario" >
+            
+            <form>
+            <h2 className="fw-bold">{textos.logintitulo}</h2>
+            <p className="lead">{textos.logintexto}</p>
 
-          
-          <a className="navbar-brand fw-bold" href="#">
-          <img src={logo} alt="Logo" height="60px" className="d-inline-block align-text-top"/>
-          </a>
-          <button className="navbar-toggler mx-2" type="button" onClick={toggleMenu}>
-            <span className="navbar-toggler-icon mx-2"></span>
-          </button>
+            <div className="form-group">
+                <label for="exampleInputEmail1" className="fw-bold"> Correo Electronico </label>
+                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ejemplo : wes.dev@gmail.com"></input>
+                <small id="emailHelp" className="form-text text-muted">Nunca compartas tu email con otras Personas</small> 
+            </div>
+            <div className="form-group">
+                <label for="exampleInputPassword1" className="fw-bold"> Contraseña </label>
+                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Tu contraseña es secreta no la compartas con nadie"></input>
+            </div>
+            <span></span>
+            <hr />
+            <button type="submit" className="btn btn-primary btn-lg w-100">Ingresar</button>
+            <hr />
+            <div className="row">
+            <div className="col-md-6 mb-3">
+            <Link to="/">
+            <button type="button" className="btn btn-danger btn-lg w-100">Regresar</button>
+            </Link>
+            </div>
+            <div className="col-md-6 mb-3">
+            
+            <Link to="/Register">
+            <button type="button" className="btn btn-success btn-lg w-100">Registrarse</button>
+            </Link>
+            <p className="lead text-center">Eres nuevo ? </p>
+            </div>
+            </div>
 
+            </form>
 
-          {/* Menú colapsable */}
-          <div className={`collapse navbar-collapse ${menuAbierto ? "show" : ""}`} id="navbarNav">
-            <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
-              <li className="nav-item">
-                <button type="button" className={`${modoOscuro ? "btn btn-light mx-2" : "btn btn-dark mx-2"}`}>
-                  {textos.boton1}
-                </button>
-              </li>
-              <li className="nav-item">
-                <button type="button" className={`${modoOscuro ? "btn btn-light mx-2" : "btn btn-dark mx-2"}`}>
-                  {textos.boton2}
-                </button>
-              </li>
-              <li className="nav-item">
-                <button className={`${modoOscuro ? "btn btn-outline-light mx-2" : "btn btn-outline-dark mx-2"}`} onClick={toggleModo}>
-                  {modoOscuro ? "☀️" : "🌙"}
-                </button>
-              </li>
-            </ul>
-          </div>
-    
- 
-      </nav>
-        <h1 className="fw-bold">{textos.titulo}</h1>
-        <p className="lead">{textos.descripcion}</p>
-        <button className="btn btn-primary btn-lg mt-3">{textos.boton}</button>
-
+        </div>
     </div>
   );
 };
