@@ -46,7 +46,9 @@ export const Login = () => {
             </div>
             <span></span>
             <hr />
+            <Link to="/Dashboard">
             <button type="submit" className="btn btn-primary btn-lg w-100">Ingresar</button>
+            </Link>
             <hr />
             <div className="row">
             <div className="col-md-6 mb-3">

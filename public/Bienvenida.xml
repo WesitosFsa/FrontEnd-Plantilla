@@ -9,4 +9,10 @@
     <logintexto>Esto es un Blabla bla bla automatizado en el que podras bla bla bla</logintexto>
     <registrotitulo>Bienvenido al Registro de Usuarios</registrotitulo>
     <registrotexto>Esto es un Blabla bla bla automatizado en el que podras bla bla bla</registrotexto>
+    <modulo1titulo>Materias</modulo1titulo>
+    <modulo2titulo>Estudiantes</modulo2titulo>
+    <modulo3titulo>Matrículas</modulo3titulo>
+    <modulo1descripcion>Descripcion Modulo1</modulo1descripcion>
+    <modulo2descripcion>Descripcion Modulo2</modulo2descripcion>
+    <modulo3descripcion>Descripcion Modulo3</modulo3descripcion>
 </contenido>
