@@ -4,6 +4,8 @@ import logo from '../assets/logo.png';
 import usuario from '../assets/usuario.png';
 import '../styles/Login.css';
 import RegistrarModulo1 from '../components/RegistrarModulo1'; // Importar formulario
+
+
 export const Modulo1 = () => {
   const [textos, setTextos] = useState({});
   const [menuAbierto, setMenuAbierto] = useState(false);
