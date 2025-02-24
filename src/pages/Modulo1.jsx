@@ -3,15 +3,13 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import usuario from '../assets/usuario.png';
 import '../styles/Login.css';
-
+import RegistrarModulo1 from '../components/RegistrarModulo1'; // Importar formulario
 export const Modulo1 = () => {
   const [textos, setTextos] = useState({});
   const [menuAbierto, setMenuAbierto] = useState(false);
-
   const toggleMenu = () => {
     setMenuAbierto(!menuAbierto);
   };
-
   useEffect(() => {
     fetch("/Bienvenida.xml") // Cargar el XML desde public/
       .then(response => response.text())
@@ -83,41 +81,11 @@ export const Modulo1 = () => {
 
       {/* Sección clara (70%) */}
       <div className="flex-grow-1 bg-light text-dark d-flex flex-column align-items-center p-4">
-        <h2 className="text-center">{textos.modulo1titulo}</h2>
-        <div className="row row-cols-1 row-cols-md-3 g-4 w-100">
-          {/* Tarjetas Responsivas */}
-          <div className="col">
-            <div className="card h-100">
-              <img className="card-img-top" src={logo} alt="Materias" />
-              <div className="card-body">
-                <h5 className="card-title">Materias</h5>
-                <p className="card-text">Descripción breve de las materias.</p>
-                <p href="#" className="btn btn-primary">Ir</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col">
-            <div className="card h-100">
-              <img className="card-img-top" src={logo} alt="Estudiantes" />
-              <div className="card-body">
-                <h5 className="card-title">Estudiantes</h5>
-                <p className="card-text">Información sobre los estudiantes.</p>
-                <p href="#" className="btn btn-primary">Ir</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col">
-            <div className="card h-100">
-              <img className="card-img-top" src={logo} alt="Matrículas" />
-              <div className="card-body">
-                <h5 className="card-title">Matrículas</h5>
-                <p className="card-text">Gestiona las matrículas aquí.</p>
-                <p href="#" className="btn btn-primary">Ir</p>
-              </div>
-            </div>
-          </div>
+        <h2 className="text-center fw-bold">{textos.modulo1titulo}</h2>
+        
+        {/* Formulario para Registrar Módulo 1 */}
+        <div className="w-75">
+          <RegistrarModulo1 />
         </div>
       </div>
     </div>

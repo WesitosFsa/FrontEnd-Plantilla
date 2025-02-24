@@ -84,7 +84,7 @@ export const Dashboard = () => {
 
       {/* Sección clara (70%) */}
       <div className="flex-grow-1 bg-light text-dark d-flex flex-column align-items-center p-4">
-        <h2 className="text-center">Dashboard</h2>
+        <h2 className="text-center fw-bold">Dashboard</h2>
         <div className="row row-cols-1 row-cols-md-3 g-4 w-100">
           {/* Tarjetas Responsivas */}
           <div className="col">
