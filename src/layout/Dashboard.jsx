@@ -7,7 +7,17 @@ import '../styles/Login.css';
 export const Dashboard = () => {
   const [textos, setTextos] = useState({});
   const [menuAbierto, setMenuAbierto] = useState(false);
+  
+  const cerrarSesion = () => {
+    // Borrar los datos del usuario del localStorage
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('apellido');
+    localStorage.removeItem('token');
 
+    // Redirigir al usuario a la página de inicio
+    navigate('/');
+  };
+  
   const toggleMenu = () => {
     setMenuAbierto(!menuAbierto);
   };
@@ -18,7 +28,6 @@ export const Dashboard = () => {
       .then(str => {
         const parser = new DOMParser();
         const xml = parser.parseFromString(str, "text/xml");
-
         setTextos({
           logintitulo: xml.getElementsByTagName("logintitulo")[0]?.textContent || "Bienvenido",
           modulo1titulo: xml.getElementsByTagName("modulo1titulo")[0].textContent,
@@ -27,11 +36,6 @@ export const Dashboard = () => {
           modulo1descripcion: xml.getElementsByTagName("modulo1descripcion")[0].textContent,
           modulo2descripcion: xml.getElementsByTagName("modulo2descripcion")[0].textContent,
           modulo3descripcion: xml.getElementsByTagName("modulo3descripcion")[0].textContent
-
-
-
-
-
         });
       })
       .catch(error => console.error("Error cargando XML:", error));
@@ -58,7 +62,9 @@ export const Dashboard = () => {
                 </ul>
                 
                 {/* Botón alineado abajo */}
-                <button type="button" className="btn btn-danger w-100 mt-auto">Cerrar Sesión</button>
+                <Link to='/'>
+                <button type="button" className="btn btn-danger w-100 mt-auto" onClick={cerrarSesion}>Cerrar Sesión</button>
+                </Link>
                 </div>
 
           </div>
@@ -79,7 +85,9 @@ export const Dashboard = () => {
         <h2 className="fw-light text-center">{textos.logintitulo}</h2>
         <h3 className="fw-light text-center">Nombre del usuario</h3>
         <hr />
-        <button type="button" className="btn btn-danger w-100">Cerrar Sesión</button>
+        <Link to='/'>
+        <button type="button" className="btn btn-danger w-100" onClick={cerrarSesion}>Cerrar Sesión</button>
+        </Link>
       </div>
 
       {/* Sección clara (70%) */}

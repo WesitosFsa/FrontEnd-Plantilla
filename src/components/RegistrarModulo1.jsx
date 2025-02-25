@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const RegistrarModulo1 = () => {
-  const rutacrearModulo1 = "/caso1/materias/crear";
+  const rutacrearModulo1 = "/caso1/materias";
   const [textos, setTextos] = useState({});
   const [nombre, setNombre] = useState('');
   const [codigo, setCodigo] = useState('');
