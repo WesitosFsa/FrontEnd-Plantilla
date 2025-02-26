@@ -21,4 +21,7 @@
     <MSGmod1Cfail>Error no se ha podido añadir la materia</MSGmod1Cfail>
     <MSGmod2Cfail>Descripcion Modulo3</MSGmod2Cfail>
     <MSGmod3Cfail>Descripcion Modulo3</MSGmod3Cfail>
+    <modulo1tituloEditar>Materia</modulo1tituloEditar>
+    <modulo2tituloEditar>Estudiante</modulo2tituloEditar>
+    <modulo3tituloEditar>Matrícula</modulo3tituloEditar>
 </contenido>

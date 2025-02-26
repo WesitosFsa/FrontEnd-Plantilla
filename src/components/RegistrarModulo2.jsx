@@ -1,21 +1,26 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+import VerModulo2 from './VerModulo2'; // Importamos el componente de la lista de materias
+import '../styles/Modulos.css';
 const RegistrarModulo2 = () => {
-  const rutacrearModulo2 = "/caso1/estudiante/crear";
+  const rutacrearModulo2 = "/caso1/estudiantes/crear";
+  const TOKEN = localStorage.getItem('token');
+
   const [textos, setTextos] = useState({});
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [cedula, setCedula] = useState('');
-  const [fechaNacimiento, setFechaNacimiento] = useState('');
+  const [fecha_nacimiento, setFecha_nacimiento] = useState('');
   const [ciudad, setCiudad] = useState('');
   const [direccion, setDireccion] = useState('');
   const [telefono, setTelefono] = useState('');
   const [email, setEmail] = useState('');
-  const navigate = useNavigate();
+
+
+  const [mostrarModal, setMostrarModal] = useState(false); // Estado para controlar el modal
+  
   useEffect(() => {
     fetch("/Bienvenida.xml") // Cargar el XML desde public/
       .then(response => response.text())
@@ -28,9 +33,9 @@ const RegistrarModulo2 = () => {
           logintexto: xml.getElementsByTagName("logintexto")[0]?.textContent || "Texto de inicio",
           modulo2titulo: xml.getElementsByTagName("modulo2titulo")[0].textContent,
           modulo2descripcion: xml.getElementsByTagName("modulo2descripcion")[0].textContent,
-          MSGmod2Cexit: xml.getElementsByTagName("MSGmod2Cexit")[0].textContent,
-          MSGmod2Cfail: xml.getElementsByTagName("MSGmod2Cfail")[0].textContent,
-
+          MSGmod1Cexit: xml.getElementsByTagName("MSGmod1Cexit")[0].textContent,
+          MSGmod1Cfail: xml.getElementsByTagName("MSGmod1Cfail")[0].textContent,
+          modulo2tituloEditar: xml.getElementsByTagName("modulo2tituloEditar")[0].textContent,
 
         });
       })
@@ -38,88 +43,140 @@ const RegistrarModulo2 = () => {
   }, []);
   const CrearenModulo2 = async (e) => {
     e.preventDefault();
-    // Validacion de Campos
-    if ([nombre, apellido, cedula, fechaNacimiento, ciudad, direccion, telefono, email].includes('')) {
-      Swal.fire({ icon: 'error', title: 'Error', text: 'Debes llenar todos los campos.' });
-      return;
-    }
-    const Verificacion_numeros = /^[0-9]+$/;
-    if (!Verificacion_numeros.test(cedula) || !Verificacion_numeros.test(telefono)) {
-      Swal.fire({ icon: 'error', title: 'Error', text: 'Cédula y Teléfono deben ser solo números.' });
-      return;
-    }
-    // Crear Dato
     try {
-      const nuevoEstudiante = { nombre, apellido, cedula, fecha_nacimiento: fechaNacimiento, ciudad, direccion, telefono, email };
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutacrearModulo2}`, nuevoEstudiante);
-      Swal.fire({ icon: 'success', title: 'Éxito', text: textos.MSGmod2Cexit });
+      const nuevoDato = { nombre, apellido,cedula,fecha_nacimiento,ciudad,direccion,telefono,email};
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutacrearModulo2}`, nuevoDato ,{
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+      Swal.fire('Éxito',textos.modulo2tituloEditar + ' se ha añadido con exito','success');
       limpiarFormulario();
     } catch (error) {
-      Swal.fire({ icon: 'error', title: 'Error', text: textos.MSGmod2Cexit });
+      Swal.fire('Error',textos.modulo2tituloEditar +' no se añadido revise esto porfavor ('+ error.response?.data?.msg + ')' ,'error');
     }
+    
   };
-
   const limpiarFormulario = () => {
     setNombre('');
     setApellido('');
     setCedula('');
-    setFechaNacimiento('');
+    setFecha_nacimiento('');
     setCiudad('');
     setDireccion('');
     setTelefono('');
     setEmail('');
   };
 
-  const handleVerEstudiantes = () => {
-    navigate('/estudiantes');
-  };
-
   return (
-    <div className="container mt-4">
-      <form onSubmit={CrearenModulo2} className="bg-white p-4 shadow rounded">
-      <h2 className="text-center mb-4">Registrar {textos.modulo2titulo}</h2>
-        <div className="row g-3">
-          <div className="col-md-6">
-            <label className="form-label">Nombre</label>
-            <input type="text" className="form-control" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+    <div className="container d-flex justify-content-center align-items-center">
+      <div className="card shadow-lg p-4" style={{ width: '100%', maxWidth: '500px' }}>
+        <h2 className="text-center mb-4">Registrar {textos.modulo2titulo}</h2>
+        <form onSubmit={CrearenModulo2}>
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Nombre</label>
+              <input
+                type="text"
+                className="form-control"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Apellido</label>
+              <input
+                type="text"
+                className="form-control"
+                value={apellido}
+                onChange={(e) => setApellido(e.target.value)}
+                required
+              />
+            </div>
           </div>
-          <div className="col-md-6">
-            <label className="form-label">Apellido</label>
-            <input type="text" className="form-control" value={apellido} onChange={(e) => setApellido(e.target.value)} />
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Cedula</label>
+              <input
+                type="number"
+                className="form-control"
+                value={cedula}
+                onChange={(e) => setCedula(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Fecha de Nacimiento</label>
+              <input
+                type="date"
+                className="form-control"
+                value={fecha_nacimiento}
+                onChange={(e) => setFecha_nacimiento(e.target.value)}
+                required
+              />
+            </div>
           </div>
-          <div className="col-md-6">
-            <label className="form-label">Cédula</label>
-            <input type="text" className="form-control" value={cedula} onChange={(e) => setCedula(e.target.value)} />
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Ciudad</label>
+              <input
+                type="text"
+                className="form-control"
+                value={ciudad}
+                onChange={(e) => setCiudad(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Direccion</label>
+              <input
+                type="text"
+                className="form-control"
+                value={direccion}
+                onChange={(e) => setDireccion(e.target.value)}
+                required
+              />
+            </div>
           </div>
-          <div className="col-md-6">
-            <label className="form-label">Fecha de Nacimiento</label>
-            <input type="date" className="form-control" value={fechaNacimiento} onChange={(e) => setFechaNacimiento(e.target.value)} />
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Telefono</label>
+              <input
+                type="number"
+                className="form-control"
+                value={telefono}
+                onChange={(e) => setTelefono(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Email</label>
+              <input
+                type="email"
+                className="form-control"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
           </div>
-          <div className="col-md-6">
-            <label className="form-label">Ciudad</label>
-            <input type="text" className="form-control" value={ciudad} onChange={(e) => setCiudad(e.target.value)} />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Dirección</label>
-            <input type="text" className="form-control" value={direccion} onChange={(e) => setDireccion(e.target.value)} />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Teléfono</label>
-            <input type="text" className="form-control" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Email</label>
-            <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </div>
-        </div>
 
-        <div className="d-flex justify-content-between mt-4">
-          <button type="submit" className="btn btn-primary">Registrar {textos.modulo2titulo}</button>
-          <button type="button" onClick={handleVerEstudiantes} className="btn btn-secondary">Ver {textos.modulo2titulo}</button>
+          <div className="d-grid gap-2">
+            <button type="submit" className="btn btn-primary">Registrar {textos.modulo2titulo}</button>
+            <button type="button" onClick={() => setMostrarModal(true)} className="btn btn-secondary">Ver {textos.modulo2titulo} Registradas</button>
+          </div>
+        </form>
+      </div>
+      {mostrarModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="btn-cerrar" onClick={() => setMostrarModal(false)}>X</button>
+            <VerModulo2 /> {/* Se muestra la lista de materias dentro del modal */}
+          </div>
         </div>
-      </form>
+      )}
     </div>
   );
 };
-
 export default RegistrarModulo2;

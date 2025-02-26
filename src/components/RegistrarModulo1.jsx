@@ -1,17 +1,20 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+import VerModulo1 from './VerModulo1'; // Importamos el componente de la lista de materias
+import '../styles/Modulos.css';
 const RegistrarModulo1 = () => {
-  const rutacrearModulo1 = "/caso1/materias";
+  const rutacrearModulo1 = "/caso1/materias/crear";
+  const TOKEN = localStorage.getItem('token');
+
   const [textos, setTextos] = useState({});
   const [nombre, setNombre] = useState('');
   const [codigo, setCodigo] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [creditos, setCreditos] = useState('');
-  const navigate = useNavigate();
+  const [mostrarModal, setMostrarModal] = useState(false); // Estado para controlar el modal
+  
   useEffect(() => {
     fetch("/Bienvenida.xml") // Cargar el XML desde public/
       .then(response => response.text())
@@ -26,7 +29,7 @@ const RegistrarModulo1 = () => {
           modulo1descripcion: xml.getElementsByTagName("modulo1descripcion")[0].textContent,
           MSGmod1Cexit: xml.getElementsByTagName("MSGmod1Cexit")[0].textContent,
           MSGmod1Cfail: xml.getElementsByTagName("MSGmod1Cfail")[0].textContent,
-
+          modulo1tituloEditar: xml.getElementsByTagName("modulo1tituloEditar")[0].textContent,
 
         });
       })
@@ -36,12 +39,17 @@ const RegistrarModulo1 = () => {
     e.preventDefault();
     try {
       const nuevoDato = { nombre, codigo, descripcion, creditos };
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutacrearModulo1}`, nuevoDato);
-      Swal.fire('Éxito',textos.MSGmod1Cexit,'success');
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutacrearModulo1}`, nuevoDato ,{
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+      Swal.fire('Éxito',textos.modulo1tituloEditar + 'se ha añadido con exito','success');
       limpiarFormulario();
     } catch (error) {
-      Swal.fire('Error',textos.MSGmod1Cfail,'error');
+      Swal.fire('Error',textos.modulo1tituloEditar +' no se añadido revise esto porfavor ('+ error.response?.data?.msg + ')' ,'error');
     }
+    
   };
   const limpiarFormulario = () => {
     setNombre('');
@@ -49,9 +57,7 @@ const RegistrarModulo1 = () => {
     setDescripcion('');
     setCreditos('');
   };
-  const handleVerMaterias = () => {
-    navigate('/materias-registradas');
-  };
+
   return (
     <div className="container d-flex justify-content-center align-items-center">
       <div className="card shadow-lg p-4" style={{ width: '100%', maxWidth: '500px' }}>
@@ -99,10 +105,18 @@ const RegistrarModulo1 = () => {
           </div>
           <div className="d-grid gap-2">
             <button type="submit" className="btn btn-primary">Registrar {textos.modulo1titulo}</button>
-            <button type="button" onClick={handleVerMaterias} className="btn btn-secondary">Ver {textos.modulo1titulo} Registradas</button>
+            <button type="button" onClick={() => setMostrarModal(true)} className="btn btn-secondary">Ver {textos.modulo1titulo} Registradas</button>
           </div>
         </form>
       </div>
+      {mostrarModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="btn-cerrar" onClick={() => setMostrarModal(false)}>X</button>
+            <VerModulo1 /> {/* Se muestra la lista de materias dentro del modal */}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

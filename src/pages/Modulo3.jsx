@@ -8,7 +8,8 @@ import RegistrarModulo3 from '../components/RegistrarModulo3'; // Importar formu
 export const Modulo3 = () => {
   const [textos, setTextos] = useState({});
   const [menuAbierto, setMenuAbierto] = useState(false);
-
+  const Nombre = localStorage.getItem('nombre')
+  const Apellido = localStorage.getItem('apellido')
   const toggleMenu = () => {
     setMenuAbierto(!menuAbierto);
   };
@@ -68,15 +69,15 @@ export const Modulo3 = () => {
         <div className="card bg-dark text-white w-100">
           <img className="card-img-top img-fluid" src={usuario} alt="Perfil" />
           <div className="card-body text-center">
-            <h5 className="card-title">Usuario</h5>
-            <p className="card-text">Información del usuario</p>
-            <p href="#" className="btn btn-primary">Ver perfil</p>
+            <h5 className="card-title">{Nombre} {Apellido}</h5>
+            <p className="card-text">Bienvenido</p>
+            <p href="#" className="btn btn-primary">Extrahuevordinario!!</p>
           </div>
         </div>
 
         <hr />
         <h2 className="fw-light text-center">{textos.logintitulo}</h2>
-        <h3 className="fw-light text-center">Nombre del usuario</h3>
+        <h3 className="fw-light text-center">{Nombre} {Apellido}</h3>
         <hr />
         <Link to='/Dashboard'>
         <button type="button" className="btn btn-success w-100">Volver al Dashboard</button>
