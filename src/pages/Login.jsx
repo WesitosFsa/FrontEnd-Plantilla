@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
-
+import axios from 'axios';
 export const Login = () => {
   const [textos, setTextos] = useState({});
   const [email, setEmail] = useState("");
@@ -26,39 +26,30 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-
+  
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/caso1/usuario/login`,
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
       );
-    
-      
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.message || "Error en la autenticación");
-      }
-      
+  
+      // Axios ya convierte la respuesta en JSON automáticamente
+      const data = response.data;
+  
       // Guardar datos en localStorage
       localStorage.setItem("token", data.token);
       localStorage.setItem("nombre", data.nombre);
       localStorage.setItem("apellido", data.apellido);
-      
+  
       // Redirigir al dashboard
       navigate("/Dashboard");
     } catch (err) {
-      setError(err.message);
+      // Capturar el mensaje de error del backend si existe
+      setError(err.response?.data?.message || "Error en la autenticación");
     }
   };
+  
 
   return (
     <div className="min-vh-100 bg-dark text-white d-flex justify-content-center align-items-center">
