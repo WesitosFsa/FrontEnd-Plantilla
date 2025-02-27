@@ -61,7 +61,7 @@ const EditarModulo2 = ({ estudiante }) => {
         }
 
         try {
-            const estudianteActualizada = { nombre, apellido, cedula, fecha_nacimiento,ciudad,direccion,telefono,telefono };
+            const estudianteActualizada = { nombre, apellido, cedula, fecha_nacimiento,ciudad,direccion,telefono};
             await axios.put(`${import.meta.env.VITE_BACKEND_URL}${rutaEditarDatosMod1}/${estudiante._id}`, estudianteActualizada,{
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
