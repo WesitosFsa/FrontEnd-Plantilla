@@ -27,7 +27,7 @@ export const Bienvenida = () => {
           titulo: xml.getElementsByTagName("titulo")[0].textContent,
           descripcion: xml.getElementsByTagName("descripcion")[0].textContent, //? Extraer el texto de al guesitos le gusta el pilin
           boton: xml.getElementsByTagName("boton")[0].textContent,
-          boton1: xml.getElementsByTagName("boton1")[0].textContent,
+          boton1: xml.getElementsByTagName("boton1")[0].textContent, //? Extraer el texto de al guesitos
           boton2: xml.getElementsByTagName("boton2")[0].textContent
 
         });
