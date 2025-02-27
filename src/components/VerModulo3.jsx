@@ -26,11 +26,11 @@ const VerModulo3 = () => {
           setTextos({
             logintitulo: xml.getElementsByTagName("logintitulo")[0]?.textContent || "Bienvenido",
             logintexto: xml.getElementsByTagName("logintexto")[0]?.textContent || "Texto de inicio",
-            modulo2titulo: xml.getElementsByTagName("modulo2titulo")[0].textContent,
+            modulo3titulo: xml.getElementsByTagName("modulo3titulo")[0].textContent,
             modulo2descripcion: xml.getElementsByTagName("modulo2descripcion")[0].textContent,
             MSGmod1Cexit: xml.getElementsByTagName("MSGmod1Cexit")[0].textContent,
             MSGmod1Cfail: xml.getElementsByTagName("MSGmod1Cfail")[0].textContent,
-            modulo2tituloEditar: xml.getElementsByTagName("modulo2tituloEditar")[0].textContent,
+            modulo3tituloEditar: xml.getElementsByTagName("modulo3tituloEditar")[0].textContent,
 
   
   
@@ -72,10 +72,10 @@ const VerModulo3 = () => {
             Authorization: `Bearer ${TOKEN}`,
           },
         });
-        Swal.fire('Eliminado!', textos.modulo2tituloEditar + ' se ha eliminado con exito', 'success');
+        Swal.fire('Eliminado!', textos.modulo3tituloEditar + ' se ha eliminado con exito', 'success');
         ObtenerDatosMod3();
       } catch (error) {
-        Swal.fire('Error!', textos.modulo2tituloEditar +' no se eliminado revise esto porfavor ('+ error + ')'  , 'error');
+        Swal.fire('Error!', textos.modulo3tituloEditar +' no se eliminado revise esto porfavor ('+ error + ')'  , 'error');
       }
     }
   };
@@ -94,7 +94,7 @@ const VerModulo3 = () => {
 
   return (
     <div className="container mt-4">
-      <h2 className="text-center mb-4">{textos.modulo2titulo} Registradas</h2>
+      <h2 className="text-center mb-4">{textos.modulo3titulo} Registradas</h2>
       {mensaje && <p className="alert alert-danger">{mensaje}</p>}
 
       <div className="table-responsive">
@@ -155,7 +155,7 @@ const VerModulo3 = () => {
         <div className="modal-overlay"  onClick={cerrarModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="btn-cerrar" onClick={cerrarModal}>✖</button>
-            <h4 className="text-center mb-3">Editar {textos.modulo2tituloEditar} </h4>
+            <h4 className="text-center mb-3">Editar {textos.modulo3tituloEditar} </h4>
             {matriculaSeleccionada && <EditarModulo3 matricula={matriculaSeleccionada} />}
           </div>
         </div>

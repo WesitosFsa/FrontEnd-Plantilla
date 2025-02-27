@@ -38,11 +38,11 @@ const RegistrarModulo3 = () => {
           setTextos({
             logintitulo: xml.getElementsByTagName("logintitulo")[0]?.textContent || "Bienvenido",
             logintexto: xml.getElementsByTagName("logintexto")[0]?.textContent || "Texto de inicio",
-            modulo2titulo: xml.getElementsByTagName("modulo2titulo")[0].textContent,
+            modulo3titulo: xml.getElementsByTagName("modulo3titulo")[0].textContent,
             modulo2descripcion: xml.getElementsByTagName("modulo2descripcion")[0].textContent,
             MSGmod1Cexit: xml.getElementsByTagName("MSGmod1Cexit")[0].textContent,
             MSGmod1Cfail: xml.getElementsByTagName("MSGmod1Cfail")[0].textContent,
-            modulo2tituloEditar: xml.getElementsByTagName("modulo2tituloEditar")[0].textContent,
+            modulo3tituloEditar: xml.getElementsByTagName("modulo3tituloEditar")[0].textContent,
   
           });
         })
@@ -189,7 +189,7 @@ const RegistrarModulo3 = () => {
                 </div>
                 <div className="d-flex justify-content-between mt-4">
                     <button type="submit" className="btn btn-primary">Registrar Matrícula</button>
-                    <button type="button" onClick={() => setMostrarModal(true)} className="btn btn-secondary">Ver {textos.modulo2titulo} Registradas</button>
+                    <button type="button" onClick={() => setMostrarModal(true)} className="btn btn-secondary">Ver {textos.modulo3titulo} Registradas</button>
 
                 </div>
             </form>
