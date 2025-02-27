@@ -28,13 +28,19 @@ export const Login = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/caso1/usuario/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/caso1/usuario/login`,
+        {
+          email,
+          password,
         },
-        body: JSON.stringify({ email, password })
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    
       
       const data = await response.json();
       
