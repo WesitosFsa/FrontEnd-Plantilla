@@ -28,7 +28,7 @@ export const Bienvenida = () => {
           descripcion: xml.getElementsByTagName("descripcion")[0].textContent, //? Extraer el texto de al guesitos le gusta el pilin
           boton: xml.getElementsByTagName("boton")[0].textContent,   //! ese wesitos un falso
           boton1: xml.getElementsByTagName("boton1")[0].textContent, //? Extraer el texto de al guesitos
-          boton2: xml.getElementsByTagName("boton2")[0].textContent 
+          boton2: xml.getElementsByTagName("boton2")[0].textContent  //- ese wuesitos necesita investigar simon simon
 
         });
       })
