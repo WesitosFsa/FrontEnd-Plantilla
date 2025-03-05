@@ -9,7 +9,7 @@ const EditarModulo3 = ({ reserva }) => {
     const [descripcion, setDescripcion] = useState(reserva?.descripcion || '');
     
     const TOKEN = localStorage.getItem('token');
-    const rutaEditarDatosMod1 = "/caso1/reservas/actualizar";
+    const rutaEditarDatosMod1 = "/caso5/reserva/actualizar";
 
     useEffect(() => {
         fetch("/Bienvenida.xml")
