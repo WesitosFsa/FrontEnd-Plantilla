@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import VerModulo1 from './VerModulo1'; // Importamos el componente de la lista de materias
 import '../styles/Modulos.css';
 const RegistrarModulo1 = () => {
-  const rutacrearModulo1 = "/caso1/materias/crear";
+  const rutacrearModulo1 = "/caso5/auditorio/crear";
   const TOKEN = localStorage.getItem('token');
 
   const [textos, setTextos] = useState({});

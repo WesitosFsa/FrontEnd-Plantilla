@@ -5,15 +5,15 @@ import EditarModulo1 from './EditarModulo1'; // Importamos el componente de edic
 import '../styles/Modulos.css'; // Asegúrate de importar los estilos correctos
 
 const VerModulo1 = () => {
-  const [textos, setTextos] = useState({});
-  const rutaObtenerDatosMod1 = "/caso1/materias/ver";
-  const rutaEliminarDatosMod1 = "/caso1/materias/eliminar";
+  const [textos, setTextos] = useState0({});
+  const rutaObtenerDatosMod1 = "/caso5/auditorio/ver";
+  const rutaEliminarDatosMod1 = "/caso5/auditorio/eliminar";
   const TOKEN = localStorage.getItem('token');
 
-  const [materias, setMaterias] = useState([]);
+  const [auditorios, setAuditorios] = useState([]);
   const [mensaje, setMensaje] = useState('');
   const [modalAbierto, setModalAbierto] = useState(false); // Control del modal
-  const [materiaSeleccionada, setMateriaSeleccionada] = useState(null); // Estado para la materia a editar
+  const [auditorioSeleccionado, setAuditorioSeleccionado] = useState(null); // Estado para la auditorio a editar
 
   useEffect(() => {
     fetch("/Bienvenida.xml") // Cargar el XML desde public/
@@ -46,16 +46,16 @@ const VerModulo1 = () => {
           Authorization: `Bearer ${TOKEN}`,
         },
       });
-      setMaterias(data);
+      setAuditorios(data);
     } catch (error) {
-      setMensaje('Error al obtener las materias');
+      setMensaje('Error al obtener las auditorios');
     }
   };
 
   const EliminarDatosMod1 = async (id) => {
     const result = await Swal.fire({
       title: '¿Estás seguro?',
-      text: "No podrás recuperar esta materia después de eliminarla.",
+      text: "No podrás recuperar esta auditorio después de eliminarla.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -79,16 +79,16 @@ const VerModulo1 = () => {
     }
   };
 
-  // Abrir el modal con la materia seleccionada
-  const abrirModalEditar = (materia) => {
-    setMateriaSeleccionada(materia);
+  // Abrir el modal con la auditorio seleccionada
+  const abrirModalEditar = (auditorio) => {
+    setAuditorioSeleccionado(auditorio);
     setModalAbierto(true);
   };
 
   // Cerrar el modal
   const cerrarModal = () => {
     setModalAbierto(false);
-    setMateriaSeleccionada(null);
+    setAuditorioSeleccionado(null);
     ObtenerDatosMod1();
   };
 
@@ -101,25 +101,28 @@ const VerModulo1 = () => {
         <table className="table table-striped table-hover table-bordered">
           <thead className="table-dark text-center">
             <tr>
+              <th>Codigo</th>
               <th>Nombre</th>
-              <th>Código</th>
-              <th>Descripción</th>
-              <th>Créditos</th>
+              <th>Ubicacion</th>
+              <th>Capacidad</th>
+              <th>Descripcion</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {materias.map((materia) => (
-              <tr key={materia._id} className="text-center align-middle">
-                <td>{materia.nombre}</td>
-                <td>{materia.codigo}</td>
-                <td>{materia.descripcion}</td>
-                <td>{materia.creditos}</td>
+            {auditorios.map((auditorio) => (
+              <tr key={auditorio._id} className="text-center align-middle">
+                <td>{auditorio.codigo}</td>
+                <td>{auditorio.nombre}</td>
+                <td>{auditorio.ubicacion}</td>
+                <td>{auditorio.capacidad}</td>
+
+                <td>{auditorio.descripcion}</td>
                 <td>
-                  <button className="btn btn-info me-2" onClick={() => abrirModalEditar(materia)}>
+                  <button className="btn btn-info me-2" onClick={() => abrirModalEditar(auditorio)}>
                     Editar
                   </button>
-                  <button className="btn btn-danger" onClick={() => EliminarDatosMod1(materia._id)}>
+                  <button className="btn btn-danger" onClick={() => EliminarDatosMod1(auditorio._id)}>
                     Eliminar
                   </button>
                 </td>
@@ -135,7 +138,7 @@ const VerModulo1 = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="btn-cerrar" onClick={cerrarModal}>✖</button>
             <h4 className="text-center mb-3">Editar {textos.modulo1tituloEditar} </h4>
-            {materiaSeleccionada && <EditarModulo1 materia={materiaSeleccionada} />}
+            {auditorioSeleccionado && <EditarModulo1 auditorio={auditorioSeleccionado} />}
           </div>
         </div>
       )}
