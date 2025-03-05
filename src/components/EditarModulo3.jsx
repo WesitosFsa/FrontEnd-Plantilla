@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const EditarModulo3 = ({ matricula }) => {
+const EditarModulo3 = ({ reserva }) => {
     const [textos, setTextos] = useState({});
     
-    const [codigo, setCodigo] = useState(matricula?.codigo || '');
-    const [descripcion, setDescripcion] = useState(matricula?.descripcion || '');
+    const [codigo, setCodigo] = useState(reserva?.codigo || '');
+    const [descripcion, setDescripcion] = useState(reserva?.descripcion || '');
     
     const TOKEN = localStorage.getItem('token');
-    const rutaEditarDatosMod1 = "/caso1/matriculas/actualizar";
+    const rutaEditarDatosMod1 = "/caso1/reservas/actualizar";
 
     useEffect(() => {
         fetch("/Bienvenida.xml")
@@ -24,11 +24,11 @@ const EditarModulo3 = ({ matricula }) => {
             })
             .catch(error => console.error("Error cargando XML:", error));
     
-        if (matricula) {
-            setCodigo(matricula.codigo);
-            setDescripcion(matricula.descripcion);
+        if (reserva) {
+            setCodigo(reserva.codigo);
+            setDescripcion(reserva.descripcion);
         }
-    }, [matricula]);
+    }, [reserva]);
     
     const ActualizarDatosMod2 = async (e) => {
         e.preventDefault();
@@ -38,10 +38,10 @@ const EditarModulo3 = ({ matricula }) => {
         }
     
         try {
-            const datosMatricula = { codigo, descripcion };
+            const datosReserva = { codigo, descripcion };
     
-            await axios.put(`${import.meta.env.VITE_BACKEND_URL}${rutaEditarDatosMod1}/${matricula._id}`, 
-                datosMatricula, 
+            await axios.put(`${import.meta.env.VITE_BACKEND_URL}${rutaEditarDatosMod1}/${reserva._id}`, 
+                datosReserva, 
                 { headers: { Authorization: `Bearer ${TOKEN}` } }
             );
     

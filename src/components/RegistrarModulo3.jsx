@@ -109,7 +109,7 @@ const RegistrarModulo3 = () => {
                   Authorization: `Bearer ${TOKEN}`,
                 },
               });
-            Swal.fire({ icon: 'success', title: 'Éxito', text: 'Matrícula creada con éxito.' });
+            Swal.fire({ icon: 'success', title: 'Éxito', text: 'Reserva creada con éxito.' });
             limpiarFormulario();
         } catch (error) {
             Swal.fire({ icon: 'error', title: 'Error', text: error.response ? error.response.data.msg : 'Error al crear la matrícula.' });
