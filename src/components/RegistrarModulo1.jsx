@@ -12,7 +12,7 @@ const RegistrarModulo1 = () => {
   const [codigo, setCodigo] = useState('');
   const [nombre, setNombre] = useState('');
   const [ubicacion, setUbicacion] = useState('');
-  const [capacidad, setCapacidad] = useState('');
+  const [capacidad, setCapacidad] = useState();
   const [descripcion, setDescripcion] = useState('');
 
   const [mostrarModal, setMostrarModal] = useState(false); // Estado para controlar el modal
