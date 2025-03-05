@@ -40,7 +40,7 @@ const RegistrarModulo1 = () => {
   const CrearenModulo1 = async (e) => {
     e.preventDefault();
     try {
-      const nuevoDato = { nombre, codigo, descripcion, creditos };
+      const nuevoDato = { codigo, nombre, ubicacion, capacidad, descripcion };
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutacrearModulo1}`, nuevoDato ,{
         headers: {
           Authorization: `Bearer ${TOKEN}`,
