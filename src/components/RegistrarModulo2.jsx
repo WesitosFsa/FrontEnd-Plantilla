@@ -17,6 +17,8 @@ const RegistrarModulo2 = () => {
   const [direccion, setDireccion] = useState('');
   const [telefono, setTelefono] = useState('');
   const [email, setEmail] = useState('');
+  const [empresa, setEmpresa] = useState('');
+
 
 
   const [mostrarModal, setMostrarModal] = useState(false); // Estado para controlar el modal
@@ -66,6 +68,8 @@ const RegistrarModulo2 = () => {
     setDireccion('');
     setTelefono('');
     setEmail('');
+    setEmpresa('');
+
   };
 
   return (
@@ -157,6 +161,18 @@ const RegistrarModulo2 = () => {
                 className="form-control"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div>
+              <label className="form-label">Empresa</label>
+              <input
+                type="text"
+                className="form-control"
+                value={empresa}
+                onChange={(e) => setEmpresa(e.target.value)}
                 required
               />
             </div>
