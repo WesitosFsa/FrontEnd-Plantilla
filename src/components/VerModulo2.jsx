@@ -10,10 +10,10 @@ const VerModulo2 = () => {
   const rutaEliminarDatosMod2 = "/caso5/conferencista/eliminar";
   const TOKEN = localStorage.getItem('token');
 
-  const [auditorioss, setauditorioss] = useState([]);
+  const [conferencistass, setconferencistass] = useState([]);
   const [mensaje, setMensaje] = useState('');
   const [modalAbierto, setModalAbierto] = useState(false); // Control del modal
-  const [auditoriosSeleccionada, setauditoriosSeleccionada] = useState(null); // Estado para la auditorios a editar
+  const [conferencistasSeleccionada, setconferencistasSeleccionada] = useState(null); // Estado para la conferencistas a editar
 
   useEffect(() => {
     fetch("/Bienvenida.xml") // Cargar el XML desde public/
@@ -46,16 +46,16 @@ const VerModulo2 = () => {
           Authorization: `Bearer ${TOKEN}`,
         },
       });
-      setauditorioss(data);
+      setconferencistass(data);
     } catch (error) {
-      setMensaje('Error al obtener las auditorioss');
+      setMensaje('Error al obtener las conferencistass');
     }
   };
 
   const EliminarDatosMod2 = async (id) => {
     const result = await Swal.fire({
       title: '¿Estás seguro?',
-      text: "No podrás recuperar esta auditorios después de eliminarla.",
+      text: "No podrás recuperar esta conferencistas después de eliminarla.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -79,16 +79,16 @@ const VerModulo2 = () => {
     }
   };
 
-  // Abrir el modal con la auditorios seleccionada
-  const abrirModalEditar = (auditorios) => {
-    setauditoriosSeleccionada(auditorios);
+  // Abrir el modal con la conferencistas seleccionada
+  const abrirModalEditar = (conferencistas) => {
+    setconferencistasSeleccionada(conferencistas);
     setModalAbierto(true);
   };
 
   // Cerrar el modal
   const cerrarModal = () => {
     setModalAbierto(false);
-    setauditoriosSeleccionada(null);
+    setconferencistasSeleccionada(null);
     ObtenerDatosMod2();
   };
 
@@ -118,23 +118,23 @@ const VerModulo2 = () => {
             </tr>
           </thead>
           <tbody>
-            {auditorioss.map((auditorios) => (
-              <tr key={auditorios._id} className="text-center align-middle">
-                <td>{auditorios.nombre}</td>
-                <td>{auditorios.apellido}</td>
-                <td>{auditorios.cedula}</td>
-                <td>{auditorios.fecha_nacimiento}</td>
-                <td>{auditorios.ciudad}</td>
-                <td>{auditorios.genero}</td>
-                <td>{auditorios.direccion}</td>
-                <td>{auditorios.telefono}</td>
-                <td>{auditorios.email}</td>
+            {conferencistass.map((conferencistas) => (
+              <tr key={conferencistas._id} className="text-center align-middle">
+                <td>{conferencistas.nombre}</td>
+                <td>{conferencistas.apellido}</td>
+                <td>{conferencistas.cedula}</td>
+                <td>{conferencistas.fecha_nacimiento}</td>
+                <td>{conferencistas.ciudad}</td>
+                <td>{conferencistas.genero}</td>
+                <td>{conferencistas.direccion}</td>
+                <td>{conferencistas.telefono}</td>
+                <td>{conferencistas.email}</td>
 
                 <td>
-                  <button className="btn btn-info me-2" onClick={() => abrirModalEditar(auditorios)}>
+                  <button className="btn btn-info me-2" onClick={() => abrirModalEditar(conferencistas)}>
                     Editar
                   </button>
-                  <button className="btn btn-danger" onClick={() => EliminarDatosMod2(auditorios._id)}>
+                  <button className="btn btn-danger" onClick={() => EliminarDatosMod2(conferencistas._id)}>
                     Eliminar
                   </button>
                 </td>
@@ -150,7 +150,7 @@ const VerModulo2 = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="btn-cerrar" onClick={cerrarModal}>✖</button>
             <h4 className="text-center mb-3">Editar {textos.modulo2tituloEditar} </h4>
-            {auditoriosSeleccionada && <EditarModulo2 auditorios={auditoriosSeleccionada} />}
+            {conferencistasSeleccionada && <EditarModulo2 conferencistas={conferencistasSeleccionada} />}
           </div>
         </div>
       )}
