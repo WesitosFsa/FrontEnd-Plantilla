@@ -11,7 +11,7 @@ const EditarModulo1 = ({ auditorio }) => {
     const [ubicacion, setUbicacion] = useState(auditorio?.ubicacion || '');
     const [capacidad, setCapacidad] = useState(auditorio?.capacidad || '');
     const TOKEN = localStorage.getItem('token');
-    const rutaEditarDatosMod1 = "/caso1/auditorios/actualizar";
+    const rutaEditarDatosMod1 = "/caso5/auditorio/actualizar";
 
 
     useEffect(() => {

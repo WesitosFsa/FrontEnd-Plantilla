@@ -6,8 +6,8 @@ import '../styles/Modulos2.css'; // Asegúrate de importar los estilos correctos
 
 const VerModulo2 = () => {
   const [textos, setTextos] = useState({});
-  const rutaObtenerDatosMod2 = "/caso1/estudiantes/ver";
-  const rutaEliminarDatosMod2 = "/caso1/estudiantes/eliminar";
+  const rutaObtenerDatosMod2 = "/caso5/conferencista/ver";
+  const rutaEliminarDatosMod2 = "/caso5/conferencista/eliminar";
   const TOKEN = localStorage.getItem('token');
 
   const [estudiantes, setEstudiantes] = useState([]);

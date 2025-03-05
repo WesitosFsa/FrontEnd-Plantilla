@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import VerModulo2 from './VerModulo2'; // Importamos el componente de la lista de materias
 import '../styles/Modulos.css';
 const RegistrarModulo2 = () => {
-  const rutacrearModulo2 = "/caso1/estudiantes/crear";
+  const rutacrearModulo2 = "/caso5/conferencista/crear";
   const TOKEN = localStorage.getItem('token');
 
   const [textos, setTextos] = useState({});
@@ -46,7 +46,7 @@ const RegistrarModulo2 = () => {
   const CrearenModulo2 = async (e) => {
     e.preventDefault();
     try {
-      const nuevoDato = { nombre, apellido,cedula,fecha_nacimiento,ciudad,direccion,telefono,email};
+      const nuevoDato = { nombre, apellido,cedula,fecha_nacimiento,ciudad,direccion,telefono,email,empresa};
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutacrearModulo2}`, nuevoDato ,{
         headers: {
           Authorization: `Bearer ${TOKEN}`,

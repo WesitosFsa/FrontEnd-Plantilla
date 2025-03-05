@@ -15,7 +15,7 @@ const EditarModulo2 = ({ estudiante }) => {
     const [email, setEmail] = useState(estudiante?.nombre || '');
   
     const TOKEN = localStorage.getItem('token');
-    const rutaEditarDatosMod1 = "/caso1/estudiantes/actualizar";
+    const rutaEditarDatosMod1 = "/caso5/conferencista/actualizar";
 
 
     useEffect(() => {
