@@ -6,9 +6,10 @@ const EditarModulo1 = ({ materia }) => {
     const [textos, setTextos] = useState({});
     
     const [nombre, setNombre] = useState(materia?.nombre || '');
-    const [codigo, setCodigo] = useState(materia?.codigo || '');
+    const [cedula, setcedula] = useState(materia?.cedula || '');
     const [descripcion, setDescripcion] = useState(materia?.descripcion || '');
-    const [creditos, setCreditos] = useState(materia?.creditos || '');
+    const [ubicacion, setUbicacion] = useState(materia?.ubicacion || '');
+    const [capacidad, setCapacidad] = useState(materia?.capacidad || '');
     const TOKEN = localStorage.getItem('token');
     const rutaEditarDatosMod1 = "/caso1/materias/actualizar";
 
@@ -36,7 +37,7 @@ const EditarModulo1 = ({ materia }) => {
         .catch(error => console.error("Error cargando XML:", error));
         if (materia) {
             setNombre(materia.nombre);
-            setCodigo(materia.codigo);
+            setcedula(materia.cedula);
             setDescripcion(materia.descripcion);
             setCreditos(materia.creditos);
         }
@@ -45,13 +46,13 @@ const EditarModulo1 = ({ materia }) => {
 
     const ActualizarDatosMod1 = async (e) => {
         e.preventDefault();
-        if (!nombre || !codigo || !descripcion || !creditos) {
+        if (!nombre || !cedula || !descripcion || !creditos || !ubicacion) {
             Swal.fire('Advertencia', 'Por favor, complete todos los campos.', 'warning');
             return;
         }
 
         try {
-            const materiaActualizada = { nombre, codigo, descripcion, creditos };
+            const materiaActualizada = { nombre, cedula, descripcion, capacidad };
             await axios.put(`${import.meta.env.VITE_BACKEND_URL}${rutaEditarDatosMod1}/${materia._id}`, materiaActualizada,{
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
@@ -76,7 +77,7 @@ const EditarModulo1 = ({ materia }) => {
                     </div>
                     <div className="col-md-6 mb-3">
                         <label className="form-label fw-bold">Código</label>
-                        <input type="text" className="form-control" value={codigo} onChange={(e) => setCodigo(e.target.value)} required />
+                        <input type="text" className="form-control" value={cedula} onChange={(e) => setcedula(e.target.value)} required />
                     </div>
                 </div>
 
@@ -86,8 +87,15 @@ const EditarModulo1 = ({ materia }) => {
                         <input type="text" className="form-control" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
                     </div>
                     <div className="col-md-6 mb-3">
-                        <label className="form-label fw-bold">Créditos</label>
-                        <input type="number" className="form-control" value={creditos} onChange={(e) => setCreditos(e.target.value)} required />
+                        <label className="form-label fw-bold">Ubicacion</label>
+                        <input type="text" className="form-control" value={ubicacion} onChange={(e) => setUbicacion(e.target.value)} required />
+                    </div>
+                </div>
+                <div className="row">
+
+                    <div className="col-md-6 mb-3">
+                        <label className="form-label fw-bold">Capacidad</label>
+                        <input type="number" className="form-control" value={capacidad} onChange={(e) => setCapacidad(e.target.value)} required />
                     </div>
                 </div>
 
