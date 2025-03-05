@@ -8,16 +8,16 @@ const EditarModulo2 = ({ conferencista }) => {
 
 
       const [nombre, setNombre] = useState(conferencista?.nombre || '');
-      const [apellido, setApellido] = useState(conferencista?.nombre || '');
-      const [cedula, setCedula] = useState(conferencista?.nombre || '');
-      const [fecha_nacimiento, setFecha_nacimiento] = useState(conferencista?.nombre || '');
-      const [ciudad, setCiudad] = useState(conferencista?.nombre || '');
-      const [genero, setGenero] = useState(conferencista?.nombre || '');
+      const [apellido, setApellido] = useState(conferencista?.apellido || '');
+      const [cedula, setCedula] = useState(conferencista?.cedula || '');
+      const [fecha_nacimiento, setFecha_nacimiento] = useState(conferencista?.fecha_nacimiento || '');
+      const [ciudad, setCiudad] = useState(conferencista?.ciudad || '');
+      const [genero, setGenero] = useState(conferencista?.genero || '');
     
-      const [direccion, setDireccion] = useState(conferencista?.nombre || '');
-      const [telefono, setTelefono] =useState(conferencista?.nombre || '');
-      const [email, setEmail] = useState(conferencista?.nombre || '');
-      const [empresa, setEmpresa] = useState(conferencista?.nombre || '');
+      const [direccion, setDireccion] = useState(conferencista?.direccion || '');
+      const [telefono, setTelefono] =useState(conferencista?.telefono || '');
+      const [email, setEmail] = useState(conferencista?.email || '');
+      const [empresa, setEmpresa] = useState(conferencista?.empresa || '');
     
     
   
@@ -55,8 +55,8 @@ const EditarModulo2 = ({ conferencista }) => {
             setDireccion(conferencista.direccion);
             setTelefono(conferencista.telefono);
             setEmail(conferencista.email);
-            setEmail(conferencista.genero);
-            setEmail(conferencista.empresa);
+            setEmpresa(conferencista.genero);
+            setGenero(conferencista.empresa);
 
 
         }
