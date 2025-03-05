@@ -65,7 +65,7 @@ const EditarModulo2 = ({ conferencista }) => {
 
     const ActualizarDatosMod2 = async (e) => {
         e.preventDefault();
-        if (!nombre || !apellido || !cedula || !fecha_nacimiento || !ciudad || !direccion || !telefono || !email) {
+        if (!nombre || !apellido || !cedula || !fecha_nacimiento || !ciudad || !direccion || !telefono || !email|| !genero || !empresa) {
             Swal.fire('Advertencia', 'Por favor, complete todos los campos.', 'warning');
             return;
         }
