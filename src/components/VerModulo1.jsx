@@ -112,11 +112,10 @@ const VerModulo1 = () => {
           <tbody>
             {auditorios.map((auditorio) => (
               <tr key={auditorio._id} className="text-center align-middle">
-                <td>{auditorio.codigo}</td>
+                <td>{auditorio.cedula}</td>
                 <td>{auditorio.nombre}</td>
                 <td>{auditorio.ubicacion}</td>
                 <td>{auditorio.capacidad}</td>
-
                 <td>{auditorio.descripcion}</td>
                 <td>
                   <button className="btn btn-info me-2" onClick={() => abrirModalEditar(auditorio)}>
