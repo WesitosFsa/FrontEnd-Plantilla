@@ -134,7 +134,7 @@ const RegistrarModulo3 = () => {
     return (
         <div className="container mt-4">
             <form onSubmit={CrearenModulo3} className="bg-white p-4 shadow rounded">
-                <h2 className="text-center mb-4">Registrar Matrícula</h2>
+                <h2 className="text-center mb-4">Registrar Reserva</h2>
                 <div className="row">
                     <div className="col-md-6 mb-3">
                         <label className="form-label">Código</label>
@@ -151,9 +151,9 @@ const RegistrarModulo3 = () => {
                         <input type="text" className="form-control" value={nombreEstudiante} readOnly />
                     </div>
                     <div className="col-md-6 mb-3">
-                        <label className="form-label">Seleccionar Estudiante</label>
+                        <label className="form-label">Seleccionar Conferencista</label>
                         <select className="form-select" value={nombreEstudiante} onChange={seleccionarEstudiante}>
-                            <option value="">Seleccione un estudiante</option>
+                            <option value="">Seleccione un conferencista</option>
                             {estudiantes.map(est => (
                                 <option key={est._id} value={est._id}>{est.nombre} {est.apellido} - {est.cedula}</option>
                             ))}
@@ -162,21 +162,20 @@ const RegistrarModulo3 = () => {
                 </div>
                 <div className="row">
                     <div className="col-md-6 mb-3">
-                        <label className="form-label">Seleccionar Materia</label>
+                        <label className="form-label">Seleccionar Auditorio</label>
                         <div className="d-flex">
                             <select className="form-select me-2" value={materiaSeleccionada} onChange={(e) => setMateriaSeleccionada(e.target.value)}>
-                                <option value="">Seleccione una Materia</option>
+                                <option value="">Seleccione una auditorio</option>
                                 {materiasDisponibles.map(mat => (
                                     <option key={mat._id} value={mat._id}>{mat.nombre} ({mat.codigo}) - {mat.creditos}</option>
                                 ))}
                             </select>
-                            <button type="button" className="btn btn-success" onClick={agregarMateria}>Añadir Materia</button>
+                            <button type="button" className="btn btn-success" onClick={agregarMateria}>Añadir Auditorio</button>
                         </div>
-                        <label className="form-label">Total de Créditos Seleccionados</label>
-                        <input type="text" className="form-control" value={totalCreditos} readOnly />
+
                     </div>
                     <div className="col-md-6 mb-3">
-                        <label className="form-label">Materias seleccionadas</label>
+                        <label className="form-label">Auditorios Seleccionados</label>
                         <ul className="list-group">
                         {idMaterias.map((mat) => (
                             <li key={mat._id} className="list-group-item d-flex justify-content-between align-items-center">
