@@ -46,7 +46,7 @@ export const Login = () => {
       navigate("/Dashboard");
     } catch (err) {
       // Capturar el mensaje de error del backend si existe
-      setError(err.response?.data?.message || "Error en la autenticación");
+      setError(err.response?.data?.message || "Error usuario o contraseña incorrecta");
     }
   };
   
