@@ -12,9 +12,9 @@
     <modulo1titulo>Conferencistas</modulo1titulo>
     <modulo2titulo>Auditorios</modulo2titulo>
     <modulo3titulo>Reservas</modulo3titulo>
-    <modulo1descripcion>Descripcion Modulo1</modulo1descripcion>
-    <modulo2descripcion>Descripcion Modulo2</modulo2descripcion>
-    <modulo3descripcion>Descripcion Modulo3</modulo3descripcion>
+    <modulo1descripcion>En este sistema ingresa los conferencistas que iran al auditorio</modulo1descripcion>
+    <modulo2descripcion>En este sistema ingresa los auditorios que existen</modulo2descripcion>
+    <modulo3descripcion>En este sistema ingresa las reservas que existen</modulo3descripcion>
     <MSGmod1Cexit>Materia añadida con Exito</MSGmod1Cexit>
     <MSGmod2Cexit>Descripcion Modulo3</MSGmod2Cexit>
     <MSGmod3Cexit>Descripcion Modulo3</MSGmod3Cexit>
