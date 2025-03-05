@@ -39,14 +39,16 @@ const EditarModulo1 = ({ auditorio }) => {
             setNombre(auditorio.nombre);
             setcedula(auditorio.cedula);
             setDescripcion(auditorio.descripcion);
-            setCreditos(auditorio.creditos);
+            setUbicacion(auditorio.ubicacion);
+            setCapacidad(auditorio.capacidad);
+
         }
         
     }, [auditorio]);
 
     const ActualizarDatosMod1 = async (e) => {
         e.preventDefault();
-        if (!nombre || !cedula || !descripcion || !creditos || !ubicacion) {
+        if (!nombre || !cedula || !descripcion || !capacidad || !ubicacion) {
             Swal.fire('Advertencia', 'Por favor, complete todos los campos.', 'warning');
             return;
         }
