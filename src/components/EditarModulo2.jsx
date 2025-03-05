@@ -55,6 +55,9 @@ const EditarModulo2 = ({ conferencista }) => {
             setDireccion(conferencista.direccion);
             setTelefono(conferencista.telefono);
             setEmail(conferencista.email);
+            setEmail(conferencista.genero);
+            setEmail(conferencista.empresa);
+
 
         }
         
