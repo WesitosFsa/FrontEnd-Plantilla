@@ -14,6 +14,8 @@ const RegistrarModulo2 = () => {
   const [cedula, setCedula] = useState('');
   const [fecha_nacimiento, setFecha_nacimiento] = useState('');
   const [ciudad, setCiudad] = useState('');
+  const [genero, setGenero] = useState('');
+
   const [direccion, setDireccion] = useState('');
   const [telefono, setTelefono] = useState('');
   const [email, setEmail] = useState('');
@@ -46,7 +48,7 @@ const RegistrarModulo2 = () => {
   const CrearenModulo2 = async (e) => {
     e.preventDefault();
     try {
-      const nuevoDato = { nombre, apellido,cedula,fecha_nacimiento,ciudad,direccion,telefono,email,empresa};
+      const nuevoDato = { nombre, apellido,cedula,fecha_nacimiento,ciudad,direccion,telefono,email,empresa,genero};
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutacrearModulo2}`, nuevoDato ,{
         headers: {
           Authorization: `Bearer ${TOKEN}`,
@@ -63,6 +65,7 @@ const RegistrarModulo2 = () => {
     setNombre('');
     setApellido('');
     setCedula('');
+    setGenero('');
     setFecha_nacimiento('');
     setCiudad('');
     setDireccion('');
@@ -173,6 +176,16 @@ const RegistrarModulo2 = () => {
                 className="form-control"
                 value={empresa}
                 onChange={(e) => setEmpresa(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Empresa</label>
+              <input
+                type="text"
+                className="form-control"
+                value={genero}
+                onChange={(e) => setGenero(e.target.value)}
                 required
               />
             </div>
