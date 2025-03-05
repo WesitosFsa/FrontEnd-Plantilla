@@ -107,9 +107,10 @@ const VerModulo2 = () => {
               <th>Cedula</th>
               <th>Fecha de Nacimiento</th>
               <th>Ciudad</th>
+              <th>Genero</th>
               <th>Direccion</th>
               <th>Telefono</th>
-              <th>Genero</th>
+             
               <th>Email</th>
               <th>Acciones</th>
 

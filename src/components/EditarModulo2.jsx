@@ -2,17 +2,24 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const EditarModulo2 = ({ estudiante }) => {
+const EditarModulo2 = ({ conferencista }) => {
     const [textos, setTextos] = useState({});
     
-    const [nombre, setNombre] = useState(estudiante?.nombre || '');
-    const [apellido, setApellido] = useState(estudiante?.nombre || '');
-    const [cedula, setCedula] = useState(estudiante?.nombre || '');
-    const [fecha_nacimiento, setFecha_nacimiento] = useState(estudiante?.nombre || '');
-    const [ciudad, setCiudad] = useState(estudiante?.nombre || '');
-    const [direccion, setDireccion] = useState(estudiante?.nombre || '');
-    const [telefono, setTelefono] = useState(estudiante?.nombre || '');
-    const [email, setEmail] = useState(estudiante?.nombre || '');
+
+
+      const [nombre, setNombre] = useState(conferencista?.nombre || '');
+      const [apellido, setApellido] = useState(conferencista?.nombre || '');
+      const [cedula, setCedula] = useState(conferencista?.nombre || '');
+      const [fecha_nacimiento, setFecha_nacimiento] = useState(conferencista?.nombre || '');
+      const [ciudad, setCiudad] = useState(conferencista?.nombre || '');
+      const [genero, setGenero] = useState(conferencista?.nombre || '');
+    
+      const [direccion, setDireccion] = useState(conferencista?.nombre || '');
+      const [telefono, setTelefono] =useState(conferencista?.nombre || '');
+      const [email, setEmail] = useState(conferencista?.nombre || '');
+      const [empresa, setEmpresa] = useState(conferencista?.nombre || '');
+    
+    
   
     const TOKEN = localStorage.getItem('token');
     const rutaEditarDatosMod1 = "/caso5/conferencista/actualizar";
@@ -39,19 +46,19 @@ const EditarModulo2 = ({ estudiante }) => {
           });
         })
         .catch(error => console.error("Error cargando XML:", error));
-        if (estudiante) {
-            setNombre(estudiante.nombre);
-            setApellido(estudiante.apellido);
-            setCedula(estudiante.cedula);
-            setFecha_nacimiento(estudiante.fecha_nacimiento);
-            setCiudad(estudiante.ciudad);
-            setDireccion(estudiante.direccion);
-            setTelefono(estudiante.telefono);
-            setEmail(estudiante.email);
+        if (conferencista) {
+            setNombre(conferencista.nombre);
+            setApellido(conferencista.apellido);
+            setCedula(conferencista.cedula);
+            setFecha_nacimiento(conferencista.fecha_nacimiento);
+            setCiudad(conferencista.ciudad);
+            setDireccion(conferencista.direccion);
+            setTelefono(conferencista.telefono);
+            setEmail(conferencista.email);
 
         }
         
-    }, [estudiante]);
+    }, [conferencista]);
 
     const ActualizarDatosMod2 = async (e) => {
         e.preventDefault();
@@ -61,8 +68,8 @@ const EditarModulo2 = ({ estudiante }) => {
         }
 
         try {
-            const estudianteActualizada = { nombre, apellido, cedula, fecha_nacimiento,ciudad,direccion,telefono};
-            await axios.put(`${import.meta.env.VITE_BACKEND_URL}${rutaEditarDatosMod1}/${estudiante._id}`, estudianteActualizada,{
+            const conferencistaActualizada = { nombre, apellido, cedula, fecha_nacimiento,ciudad,direccion,telefono};
+            await axios.put(`${import.meta.env.VITE_BACKEND_URL}${rutaEditarDatosMod1}/${conferencista._id}`, conferencistaActualizada,{
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
                 },
@@ -165,6 +172,28 @@ const EditarModulo2 = ({ estudiante }) => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             readOnly
+                            required
+                        />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6 mb-3">
+                        <label className="form-label">Empresa</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={empresa}
+                            onChange={(e) => setEmpresa(e.target.value)}
+                            required
+                        />
+                        </div>
+                        <div className="col-md-6 mb-3">
+                        <label className="form-label">Genero</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={genero}
+                            onChange={(e) => setGenero(e.target.value)}
                             required
                         />
                         </div>
