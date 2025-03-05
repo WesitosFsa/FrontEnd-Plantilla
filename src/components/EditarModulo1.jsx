@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const EditarModulo1 = ({ materia }) => {
+const EditarModulo1 = ({ auditorio }) => {
     const [textos, setTextos] = useState({});
     
-    const [nombre, setNombre] = useState(materia?.nombre || '');
-    const [cedula, setcedula] = useState(materia?.cedula || '');
-    const [descripcion, setDescripcion] = useState(materia?.descripcion || '');
-    const [ubicacion, setUbicacion] = useState(materia?.ubicacion || '');
-    const [capacidad, setCapacidad] = useState(materia?.capacidad || '');
+    const [nombre, setNombre] = useState(auditorio?.nombre || '');
+    const [cedula, setcedula] = useState(auditorio?.cedula || '');
+    const [descripcion, setDescripcion] = useState(auditorio?.descripcion || '');
+    const [ubicacion, setUbicacion] = useState(auditorio?.ubicacion || '');
+    const [capacidad, setCapacidad] = useState(auditorio?.capacidad || '');
     const TOKEN = localStorage.getItem('token');
-    const rutaEditarDatosMod1 = "/caso1/materias/actualizar";
+    const rutaEditarDatosMod1 = "/caso1/auditorios/actualizar";
 
 
     useEffect(() => {
@@ -35,14 +35,14 @@ const EditarModulo1 = ({ materia }) => {
           });
         })
         .catch(error => console.error("Error cargando XML:", error));
-        if (materia) {
-            setNombre(materia.nombre);
-            setcedula(materia.cedula);
-            setDescripcion(materia.descripcion);
-            setCreditos(materia.creditos);
+        if (auditorio) {
+            setNombre(auditorio.nombre);
+            setcedula(auditorio.cedula);
+            setDescripcion(auditorio.descripcion);
+            setCreditos(auditorio.creditos);
         }
         
-    }, [materia]);
+    }, [auditorio]);
 
     const ActualizarDatosMod1 = async (e) => {
         e.preventDefault();
@@ -52,8 +52,8 @@ const EditarModulo1 = ({ materia }) => {
         }
 
         try {
-            const materiaActualizada = { nombre, cedula, descripcion, capacidad };
-            await axios.put(`${import.meta.env.VITE_BACKEND_URL}${rutaEditarDatosMod1}/${materia._id}`, materiaActualizada,{
+            const auditorioActualizada = { nombre, cedula, descripcion, capacidad };
+            await axios.put(`${import.meta.env.VITE_BACKEND_URL}${rutaEditarDatosMod1}/${auditorio._id}`, auditorioActualizada,{
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
                 },
