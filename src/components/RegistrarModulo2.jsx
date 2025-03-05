@@ -103,16 +103,25 @@ const RegistrarModulo2 = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6 mb-3">
-              <label className="form-label">Cedula</label>
-              <input
-                type="number"
-                className="form-control"
-                value={cedula}
-                onChange={(e) => setCedula(e.target.value)}
-                required
-              />
-            </div>
+          <div className="col-md-6 mb-3">
+            <label className="form-label">Cedula</label>
+            <input
+              type="text" 
+              className={`form-control ${cedula.length !== 10 && cedula.length > 0 ? 'is-invalid' : ''}`}
+              value={cedula}
+              onChange={(e) => {
+                const value = e.target.value;
+                
+                if (/^\d{0,10}$/.test(value)) {
+                  setCedula(value);
+                }
+              }}
+              required
+            />
+            {cedula.length > 0 && cedula.length !== 10 && (
+              <div className="invalid-feedback">La cédula debe tener exactamente 10 números.</div>
+            )}
+</div>
             <div className="col-md-6 mb-3">
               <label className="form-label">Fecha de Nacimiento</label>
               <input
@@ -147,16 +156,24 @@ const RegistrarModulo2 = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6 mb-3">
-              <label className="form-label">Telefono</label>
-              <input
-                type="number"
-                className="form-control"
-                value={telefono}
-                onChange={(e) => setTelefono(e.target.value)}
-                required
-              />
-            </div>
+          <div className="col-md-6 mb-3">
+  <label className="form-label">Telefono</label>
+  <input
+    type="text" 
+    className={`form-control ${telefono.length !== 10 && telefono.length > 0 ? 'is-invalid' : ''}`}
+    value={telefono}
+    onChange={(e) => {
+      const value = e.target.value;
+      if (/^\d{0,10}$/.test(value)) {
+        setTelefono(value);
+      }
+    }}
+    required
+  />
+  {telefono.length > 0 && telefono.length !== 10 && (
+    <div className="invalid-feedback">El teléfono debe tener exactamente 10 números.</div>
+  )}
+</div>
             <div className="col-md-6 mb-3">
               <label className="form-label">Email</label>
               <input
