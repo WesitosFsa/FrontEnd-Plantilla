@@ -5,7 +5,7 @@ import EditarModulo1 from './EditarModulo1'; // Importamos el componente de edic
 import '../styles/Modulos.css'; // Asegúrate de importar los estilos correctos
 
 const VerModulo1 = () => {
-  const [textos, setTextos] = useState0({});
+  const [textos, setTextos] = useState({});
   const rutaObtenerDatosMod1 = "/caso5/auditorio/ver";
   const rutaEliminarDatosMod1 = "/caso5/auditorio/eliminar";
   const TOKEN = localStorage.getItem('token');

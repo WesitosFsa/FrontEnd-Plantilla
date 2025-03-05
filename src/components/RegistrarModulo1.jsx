@@ -103,7 +103,7 @@ const RegistrarModulo1 = () => {
             <input
               type="number"
               className="form-control"
-              value={capacidad}
+              valueon={capacidad}
               onChange={(e) => setCapacidad(e.target.value)}
               required
             />
