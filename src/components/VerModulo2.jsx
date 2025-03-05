@@ -10,10 +10,10 @@ const VerModulo2 = () => {
   const rutaEliminarDatosMod2 = "/caso5/conferencista/eliminar";
   const TOKEN = localStorage.getItem('token');
 
-  const [conferencistass, setconferencistass] = useState([]);
+  const [conferencista, setconferencista] = useState([]);
   const [mensaje, setMensaje] = useState('');
   const [modalAbierto, setModalAbierto] = useState(false); // Control del modal
-  const [conferencistasSeleccionada, setconferencistasSeleccionada] = useState(null); // Estado para la conferencistas a editar
+  const [conferencistaeleccionada, setconferencistaeleccionada] = useState(null); // Estado para la conferencista a editar
 
   useEffect(() => {
     fetch("/Bienvenida.xml") // Cargar el XML desde public/
@@ -46,16 +46,16 @@ const VerModulo2 = () => {
           Authorization: `Bearer ${TOKEN}`,
         },
       });
-      setconferencistass(data);
+      setconferencista(data);
     } catch (error) {
-      setMensaje('Error al obtener las conferencistass');
+      setMensaje('Error al obtener las conferencista');
     }
   };
 
   const EliminarDatosMod2 = async (id) => {
     const result = await Swal.fire({
       title: '¿Estás seguro?',
-      text: "No podrás recuperar esta conferencistas después de eliminarla.",
+      text: "No podrás recuperar esta conferencista después de eliminarla.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -79,16 +79,16 @@ const VerModulo2 = () => {
     }
   };
 
-  // Abrir el modal con la conferencistas seleccionada
-  const abrirModalEditar = (conferencistas) => {
-    setconferencistasSeleccionada(conferencistas);
+  // Abrir el modal con la conferencista seleccionada
+  const abrirModalEditar = (conferencista) => {
+    setconferencistaeleccionada(conferencista);
     setModalAbierto(true);
   };
 
   // Cerrar el modal
   const cerrarModal = () => {
     setModalAbierto(false);
-    setconferencistasSeleccionada(null);
+    setconferencistaeleccionada(null);
     ObtenerDatosMod2();
   };
 
@@ -118,23 +118,23 @@ const VerModulo2 = () => {
             </tr>
           </thead>
           <tbody>
-            {conferencistass.map((conferencistas) => (
-              <tr key={conferencistas._id} className="text-center align-middle">
-                <td>{conferencistas.nombre}</td>
-                <td>{conferencistas.apellido}</td>
-                <td>{conferencistas.cedula}</td>
-                <td>{conferencistas.fecha_nacimiento}</td>
-                <td>{conferencistas.ciudad}</td>
-                <td>{conferencistas.genero}</td>
-                <td>{conferencistas.direccion}</td>
-                <td>{conferencistas.telefono}</td>
-                <td>{conferencistas.email}</td>
+            {conferencista.map((conferencista) => (
+              <tr key={conferencista._id} className="text-center align-middle">
+                <td>{conferencista.nombre}</td>
+                <td>{conferencista.apellido}</td>
+                <td>{conferencista.cedula}</td>
+                <td>{conferencista.fecha_nacimiento}</td>
+                <td>{conferencista.ciudad}</td>
+                <td>{conferencista.genero}</td>
+                <td>{conferencista.direccion}</td>
+                <td>{conferencista.telefono}</td>
+                <td>{conferencista.email}</td>
 
                 <td>
-                  <button className="btn btn-info me-2" onClick={() => abrirModalEditar(conferencistas)}>
+                  <button className="btn btn-info me-2" onClick={() => abrirModalEditar(conferencista)}>
                     Editar
                   </button>
-                  <button className="btn btn-danger" onClick={() => EliminarDatosMod2(conferencistas._id)}>
+                  <button className="btn btn-danger" onClick={() => EliminarDatosMod2(conferencista._id)}>
                     Eliminar
                   </button>
                 </td>
@@ -150,7 +150,7 @@ const VerModulo2 = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="btn-cerrar" onClick={cerrarModal}>✖</button>
             <h4 className="text-center mb-3">Editar {textos.modulo2tituloEditar} </h4>
-            {conferencistasSeleccionada && <EditarModulo2 conferencistas={conferencistasSeleccionada} />}
+            {conferencistaeleccionada && <EditarModulo2 conferencista={conferencistaeleccionada} />}
           </div>
         </div>
       )}
