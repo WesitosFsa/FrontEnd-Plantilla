@@ -6,9 +6,9 @@ import VerModulo3 from './VerModulo3'; // Importamos el componente de la lista d
 import '../styles/Modulos.css';
 
 const RegistrarModulo3 = () => {
-    const rutaobtenerAuditorios = "/caso1/auditorios/ver";
-    const rutaobtenerConferencistas = "/caso1/conferencistas/ver";
-    const rutaCrearMatricula = "/caso1/matriculas/crear";
+    const rutaobtenerAuditorios = "/caso5/auditorio/ver";
+    const rutaobtenerConferencistas = "/caso5/conferencista/ver";
+    const rutaCrearReserva = "/caso5/reserva/crear";
 
     const TOKEN = localStorage.getItem('token');
 
@@ -16,7 +16,7 @@ const RegistrarModulo3 = () => {
     const [textos, setTextos] = useState({});
     const [codigo, setCodigo] = useState('');
     const [descripcion, setDescripcion] = useState('');
-    const [nombreConferencista, setNombreEstudiante] = useState('');
+    const [nombreConferencista, setNombreConferencista] = useState('');
     const [idConferencista, setIdConferencista] = useState('');
     const [auditorioSeleccionado, setAuditorioSeleccionada] = useState('');
     const [idAuditorio, setIdAuditorios] = useState([]);
@@ -72,11 +72,11 @@ const RegistrarModulo3 = () => {
         }
     };
     const seleccionarConferencista = (e) => {
-        const estudiante = conferencistas.find(est => est._id === e.target.value);
-        if (estudiante) {
-            setNombreEstudiante(`${estudiante.nombre} ${estudiante.apellido} - ${estudiante.cedula}`);
-            setIdConferencista(estudiante._id);
-            setCedula(estudiante.cedula);
+        const conferencista = conferencistas.find(est => est._id === e.target.value);
+        if (conferencista) {
+            setNombreConferencista(`${conferencista.nombre} ${conferencista.apellido} - ${conferencista.cedula}`);
+            setIdConferencista(conferencista._id);
+            setCedula(conferencista.cedula);
         }
     };
     const agregarAuditorio = () => {
@@ -102,9 +102,9 @@ const RegistrarModulo3 = () => {
             return;
         }
         try {
-            const nuevoDato = {codigo,descripcion ,  id_estudiante: idConferencista,id_auditorios: idAuditorio.map(m => m._id) };
+            const nuevoDato = {codigo,descripcion ,  id_conferencista: idConferencista,id_auditorios: idAuditorio.map(m => m._id) };
 
-            await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutaCrearMatricula}`,nuevoDato,{
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutaCrearReserva}`,nuevoDato,{
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
                 },
@@ -120,7 +120,7 @@ const RegistrarModulo3 = () => {
         setCodigo('');
         setDescripcion('');
         setCedula('');
-        setNombreEstudiante('');
+        setNombreConferencista('');
         setIdConferencista('');
         setIdAuditorios([]);
         setAuditorioSeleccionada('');
@@ -143,7 +143,7 @@ const RegistrarModulo3 = () => {
                 </div>
                 <div className="row">
                     <div className="col-md-6 mb-3">
-                        <label className="form-label">Estudiante</label>
+                        <label className="form-label">Conferencista</label>
                         <input type="text" className="form-control" value={nombreConferencista} readOnly />
                     </div>
                     <div className="col-md-6 mb-3">
