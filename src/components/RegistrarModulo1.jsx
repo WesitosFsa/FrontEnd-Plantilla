@@ -9,10 +9,12 @@ const RegistrarModulo1 = () => {
   const TOKEN = localStorage.getItem('token');
 
   const [textos, setTextos] = useState({});
-  const [nombre, setNombre] = useState('');
   const [codigo, setCodigo] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [ubicacion, setUbicacion] = useState('');
+  const [capacidad, setCapacidad] = useState('');
   const [descripcion, setDescripcion] = useState('');
-  const [creditos, setCreditos] = useState('');
+
   const [mostrarModal, setMostrarModal] = useState(false); // Estado para controlar el modal
   
   useEffect(() => {
@@ -63,6 +65,16 @@ const RegistrarModulo1 = () => {
       <div className="card shadow-lg p-4" style={{ width: '100%', maxWidth: '500px' }}>
         <h2 className="text-center mb-4">Registrar {textos.modulo1titulo}</h2>
         <form onSubmit={CrearenModulo1}>
+        <div className="mb-3">
+            <label className="form-label">Código</label>
+            <input
+              type="text"
+              className="form-control"
+              value={codigo}
+              onChange={(e) => setCodigo(e.target.value)}
+              required
+            />
+          </div>
           <div className="mb-3">
             <label className="form-label">Nombre</label>
             <input
@@ -74,12 +86,22 @@ const RegistrarModulo1 = () => {
             />
           </div>
           <div className="mb-3">
-            <label className="form-label">Código</label>
+            <label className="form-label">Ubicacion</label>
             <input
               type="text"
               className="form-control"
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value)}
+              value={ubicacion}
+              onChange={(e) => setUbicacion(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Capacidad</label>
+            <input
+              type="number"
+              className="form-control"
+              value={capacidad}
+              onChange={(e) => setCapacidad(e.target.value)}
               required
             />
           </div>
@@ -90,16 +112,6 @@ const RegistrarModulo1 = () => {
               className="form-control"
               value={descripcion}
               onChange={(e) => setDescripcion(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Créditos</label>
-            <input
-              type="number"
-              className="form-control"
-              value={creditos}
-              onChange={(e) => setCreditos(e.target.value)}
               required
             />
           </div>

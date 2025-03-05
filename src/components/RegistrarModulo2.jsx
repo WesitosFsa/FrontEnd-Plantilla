@@ -166,7 +166,7 @@ const RegistrarModulo2 = () => {
             </div>
           </div>
           <div className="row">
-            <div>
+            <div className="col-md-6 mb-3">
               <label className="form-label">Empresa</label>
               <input
                 type="text"
