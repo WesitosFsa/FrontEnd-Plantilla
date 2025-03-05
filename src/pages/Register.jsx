@@ -72,7 +72,7 @@ export const Register = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/caso1/usuario/registro`, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/caso5/usuarios/registro`, {
         nombre: formData.nombre,
         apellido: formData.apellido,
         email: formData.email,

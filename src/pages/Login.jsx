@@ -29,7 +29,7 @@ export const Login = () => {
   
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/caso5/usuario/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/caso5/usuarios/login`,
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );
