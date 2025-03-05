@@ -6,15 +6,15 @@ import '../styles/Modulos2.css'; // Asegúrate de importar los estilos correctos
 
 const VerModulo3 = () => {
   const [textos, setTextos] = useState({});
-  const rutaObtenerDatosMod3 = "/caso1/matriculas/ver";
-  const rutaEliminarDatosMod3 = "/caso1/matriculas/eliminar";
+  const rutaObtenerDatosMod3 = "/caso5/reserva/ver";
+  const rutaEliminarDatosMod3 = "/caso5/reserva/eliminar";
   const TOKEN = localStorage.getItem('token');
 
-  const [matriculas, setMatriculas] = useState([]);
+  const [reservas, setReservas] = useState([]);
 
   const [mensaje, setMensaje] = useState('');
   const [modalAbierto, setModalAbierto] = useState(false); // Control del modal
-  const [matriculaSeleccionada, setMatriculaSeleccionada] = useState(null); // Estado para la matricula a editar
+  const [reservaSeleccionada, setReservaSeleccionada] = useState(null); // Estado para la reserva a editar
 
   useEffect(() => {
     fetch("/Bienvenida.xml") // Cargar el XML desde public/
@@ -47,16 +47,16 @@ const VerModulo3 = () => {
           Authorization: `Bearer ${TOKEN}`,
         },
       });
-      setMatriculas(data);
+      setReservas(data);
     } catch (error) {
-      setMensaje('Error al obtener las matriculas');
+      setMensaje('Error al obtener las reservas');
     }
   };
 
   const EliminarDatosMod3 = async (id) => {
     const result = await Swal.fire({
       title: '¿Estás seguro?',
-      text: "No podrás recuperar esta matricula después de eliminarla.",
+      text: "No podrás recuperar esta reserva después de eliminarla.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -80,14 +80,14 @@ const VerModulo3 = () => {
     }
   };
 
-  const abrirModalEditar = (matricula) => {
-    setMatriculaSeleccionada(matricula);
+  const abrirModalEditar = (reserva) => {
+    setReservaSeleccionada(reserva);
     setModalAbierto(true);
   };
 
   const cerrarModal = () => {
     setModalAbierto(false);
-    setMatriculaSeleccionada(null);
+    setReservaSeleccionada(null);
     ObtenerDatosMod3();
   };
 
@@ -103,44 +103,32 @@ const VerModulo3 = () => {
             <tr>
               <th>Codigo</th>
               <th>Descripcion</th>
-              <th>Creditos</th>  
-              <th>Estudiante</th>
-              <th>Materias</th>
+              <th>Conferencista</th>
+              <th>Auditorios</th>
               <th>Acciones</th>
       
             </tr>
           </thead>
           <tbody>
-            {matriculas.map((matricula) => (
-              <tr key={matricula._id} className="text-center align-middle">
-                <td>{matricula.codigo}</td>
-                <td>{matricula.descripcion}</td>
+            {reservas.map((reserva) => (
+              <tr key={reserva._id} className="text-center align-middle">
+                <td>{reserva.codigo}</td>
+                <td>{reserva.descripcion}</td>
+                <td>{reserva.conferencista ? `${reserva.conferencista.nombre} ${reserva.conferencista.apellido}` : "No asignado"}</td>
                 <td>
-                {matricula.materia.length > 0 ? (
-                    <>
-                    
-                    {matricula.materia.reduce((acc, mat) => acc + mat.creditos, 0)}
-                    </>
-                ) : (
-                    "Sin créditos"
-                )}
-                </td>
-
-                <td>{matricula.estudiante ? `${matricula.estudiante.nombre} ${matricula.estudiante.apellido}` : "No asignado"}</td>
-                <td>
-                {matricula.materia.length > 0 ? (
-                    matricula.materia.map((mat) => (
+                {reserva.auditorio.length > 0 ? (
+                    reserva.auditorio.map((mat) => (
                     <div key={mat._id}>{mat.nombre} ({mat.codigo}) </div>
                     ))
                 ) : (
-                    "Sin materias"
+                    "Sin auditorios"
                 )}
                 </td>
                 <td>
-                  <button className="btn btn-info me-2" onClick={() => abrirModalEditar(matricula)}>
+                  <button className="btn btn-info me-2" onClick={() => abrirModalEditar(reserva)}>
                     Editar
                   </button>
-                  <button className="btn btn-danger" onClick={() => EliminarDatosMod3(matricula._id)}>
+                  <button className="btn btn-danger" onClick={() => EliminarDatosMod3(reserva._id)}>
                     Eliminar
                   </button>
                 </td>
@@ -156,7 +144,7 @@ const VerModulo3 = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="btn-cerrar" onClick={cerrarModal}>✖</button>
             <h4 className="text-center mb-3">Editar {textos.modulo3tituloEditar} </h4>
-            {matriculaSeleccionada && <EditarModulo3 matricula={matriculaSeleccionada} />}
+            {reservaSeleccionada && <EditarModulo3 reserva={reservaSeleccionada} />}
           </div>
         </div>
       )}
