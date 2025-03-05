@@ -109,6 +109,7 @@ const VerModulo2 = () => {
               <th>Ciudad</th>
               <th>Direccion</th>
               <th>Telefono</th>
+              <th>Genero</th>
               <th>Email</th>
               <th>Acciones</th>
 
@@ -123,6 +124,7 @@ const VerModulo2 = () => {
                 <td>{estudiante.cedula}</td>
                 <td>{estudiante.fecha_nacimiento}</td>
                 <td>{estudiante.ciudad}</td>
+                <td>{estudiante.genero}</td>
                 <td>{estudiante.direccion}</td>
                 <td>{estudiante.telefono}</td>
                 <td>{estudiante.email}</td>
