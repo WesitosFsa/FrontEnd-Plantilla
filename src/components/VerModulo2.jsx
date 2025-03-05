@@ -10,10 +10,10 @@ const VerModulo2 = () => {
   const rutaEliminarDatosMod2 = "/caso5/conferencista/eliminar";
   const TOKEN = localStorage.getItem('token');
 
-  const [estudiantes, setEstudiantes] = useState([]);
+  const [auditorioss, setauditorioss] = useState([]);
   const [mensaje, setMensaje] = useState('');
   const [modalAbierto, setModalAbierto] = useState(false); // Control del modal
-  const [estudianteSeleccionada, setEstudianteSeleccionada] = useState(null); // Estado para la estudiante a editar
+  const [auditoriosSeleccionada, setauditoriosSeleccionada] = useState(null); // Estado para la auditorios a editar
 
   useEffect(() => {
     fetch("/Bienvenida.xml") // Cargar el XML desde public/
@@ -46,16 +46,16 @@ const VerModulo2 = () => {
           Authorization: `Bearer ${TOKEN}`,
         },
       });
-      setEstudiantes(data);
+      setauditorioss(data);
     } catch (error) {
-      setMensaje('Error al obtener las estudiantes');
+      setMensaje('Error al obtener las auditorioss');
     }
   };
 
   const EliminarDatosMod2 = async (id) => {
     const result = await Swal.fire({
       title: '¿Estás seguro?',
-      text: "No podrás recuperar esta estudiante después de eliminarla.",
+      text: "No podrás recuperar esta auditorios después de eliminarla.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -79,16 +79,16 @@ const VerModulo2 = () => {
     }
   };
 
-  // Abrir el modal con la estudiante seleccionada
-  const abrirModalEditar = (estudiante) => {
-    setEstudianteSeleccionada(estudiante);
+  // Abrir el modal con la auditorios seleccionada
+  const abrirModalEditar = (auditorios) => {
+    setauditoriosSeleccionada(auditorios);
     setModalAbierto(true);
   };
 
   // Cerrar el modal
   const cerrarModal = () => {
     setModalAbierto(false);
-    setEstudianteSeleccionada(null);
+    setauditoriosSeleccionada(null);
     ObtenerDatosMod2();
   };
 
@@ -117,23 +117,23 @@ const VerModulo2 = () => {
             </tr>
           </thead>
           <tbody>
-            {estudiantes.map((estudiante) => (
-              <tr key={estudiante._id} className="text-center align-middle">
-                <td>{estudiante.nombre}</td>
-                <td>{estudiante.apellido}</td>
-                <td>{estudiante.cedula}</td>
-                <td>{estudiante.fecha_nacimiento}</td>
-                <td>{estudiante.ciudad}</td>
-                <td>{estudiante.genero}</td>
-                <td>{estudiante.direccion}</td>
-                <td>{estudiante.telefono}</td>
-                <td>{estudiante.email}</td>
+            {auditorioss.map((auditorios) => (
+              <tr key={auditorios._id} className="text-center align-middle">
+                <td>{auditorios.nombre}</td>
+                <td>{auditorios.apellido}</td>
+                <td>{auditorios.cedula}</td>
+                <td>{auditorios.fecha_nacimiento}</td>
+                <td>{auditorios.ciudad}</td>
+                <td>{auditorios.genero}</td>
+                <td>{auditorios.direccion}</td>
+                <td>{auditorios.telefono}</td>
+                <td>{auditorios.email}</td>
 
                 <td>
-                  <button className="btn btn-info me-2" onClick={() => abrirModalEditar(estudiante)}>
+                  <button className="btn btn-info me-2" onClick={() => abrirModalEditar(auditorios)}>
                     Editar
                   </button>
-                  <button className="btn btn-danger" onClick={() => EliminarDatosMod2(estudiante._id)}>
+                  <button className="btn btn-danger" onClick={() => EliminarDatosMod2(auditorios._id)}>
                     Eliminar
                   </button>
                 </td>
@@ -149,7 +149,7 @@ const VerModulo2 = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="btn-cerrar" onClick={cerrarModal}>✖</button>
             <h4 className="text-center mb-3">Editar {textos.modulo2tituloEditar} </h4>
-            {estudianteSeleccionada && <EditarModulo2 estudiante={estudianteSeleccionada} />}
+            {auditoriosSeleccionada && <EditarModulo2 auditorios={auditoriosSeleccionada} />}
           </div>
         </div>
       )}
