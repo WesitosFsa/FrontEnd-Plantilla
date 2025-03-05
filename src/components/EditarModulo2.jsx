@@ -13,14 +13,10 @@ const EditarModulo2 = ({ conferencista }) => {
       const [fecha_nacimiento, setFecha_nacimiento] = useState(conferencista?.fecha_nacimiento || '');
       const [ciudad, setCiudad] = useState(conferencista?.ciudad || '');
       const [genero, setGenero] = useState(conferencista?.genero || '');
-    
       const [direccion, setDireccion] = useState(conferencista?.direccion || '');
       const [telefono, setTelefono] =useState(conferencista?.telefono || '');
       const [email, setEmail] = useState(conferencista?.email || '');
       const [empresa, setEmpresa] = useState(conferencista?.empresa || '');
-    
-    
-  
     const TOKEN = localStorage.getItem('token');
     const rutaEditarDatosMod1 = "/caso5/conferencista/actualizar";
 
