@@ -57,7 +57,10 @@ const RegistrarModulo1 = () => {
     setNombre('');
     setCodigo('');
     setDescripcion('');
-    setCreditos('');
+    setCapacidad('');
+    setUbicacion('');
+
+
   };
 
   return (

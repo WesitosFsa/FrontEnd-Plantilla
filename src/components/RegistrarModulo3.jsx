@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import VerModulo3 from './VerModulo3'; // Importamos el componente de la lista de materias
+import VerModulo3 from './VerModulo3'; // Importamos el componente de la lista de auditorios
 import '../styles/Modulos.css';
 
 const RegistrarModulo3 = () => {
-    const rutaObtenerMaterias = "/caso1/materias/ver";
-    const rutaObtenerEstudiantes = "/caso1/estudiantes/ver";
+    const rutaobtenerAuditorios = "/caso1/auditorios/ver";
+    const rutaobtenerConferencistas = "/caso1/conferencistas/ver";
     const rutaCrearMatricula = "/caso1/matriculas/crear";
 
     const TOKEN = localStorage.getItem('token');
@@ -16,13 +16,12 @@ const RegistrarModulo3 = () => {
     const [textos, setTextos] = useState({});
     const [codigo, setCodigo] = useState('');
     const [descripcion, setDescripcion] = useState('');
-    const [nombreEstudiante, setNombreEstudiante] = useState('');
-    const [idEstudiante, setIdEstudiante] = useState('');
-    const [materiaSeleccionada, setMateriaSeleccionada] = useState('');
-    const [idMaterias, setIdMaterias] = useState([]);
-    const [materiasDisponibles, setMateriasDisponibles] = useState([]);
-    const [estudiantes, setEstudiantes] = useState([]);
-    const [totalCreditos, setTotalCreditos] = useState(0);
+    const [nombreConferencista, setNombreEstudiante] = useState('');
+    const [idConferencista, setIdConferencista] = useState('');
+    const [auditorioSeleccionado, setAuditorioSeleccionada] = useState('');
+    const [idAuditorio, setIdAuditorios] = useState([]);
+    const [auditoriosDisponibles, setMateriasDisponibles] = useState([]);
+    const [conferencistas, setConferencistas] = useState([]);
 
     const navigate = useNavigate();
 
@@ -47,65 +46,63 @@ const RegistrarModulo3 = () => {
           });
         })
         .catch(error => console.error("Error cargando XML:", error));
-        obtenerMaterias();
-        obtenerEstudiantes();
+        obtenerAuditorios();
+        obtenerConferencistas();
     }, []);
 
-    const obtenerMaterias = async () => {
+    const obtenerAuditorios = async () => {
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}${rutaObtenerMaterias}`, {
+            const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}${rutaobtenerAuditorios}`, {
                 headers: { Authorization: `Bearer ${TOKEN}` },
             });
             setMateriasDisponibles(data);
         } catch (error) {
-            Swal.fire({ icon: 'error', title: 'Error', text: 'Error al obtener las materias disponibles.' });
+            Swal.fire({ icon: 'error', title: 'Error', text: 'Error al obtener las auditorios disponibles.' });
         }
     };
-    const obtenerEstudiantes = async () => {
+    const obtenerConferencistas = async () => {
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}${rutaObtenerEstudiantes}`, {
+            const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}${rutaobtenerConferencistas}`, {
                 headers: { Authorization: `Bearer ${TOKEN}` },
             });
-            setEstudiantes(Array.isArray(data) ? data : []);
+            setConferencistas(Array.isArray(data) ? data : []);
         } catch (error) {
-            Swal.fire({ icon: 'error', title: 'Error', text: 'Error al obtener los estudiantes.' });
-            setEstudiantes([]);
+            Swal.fire({ icon: 'error', title: 'Error', text: 'Error al obtener los conferencistas.' });
+            setConferencistas([]);
         }
     };
-    const seleccionarEstudiante = (e) => {
-        const estudiante = estudiantes.find(est => est._id === e.target.value);
+    const seleccionarConferencista = (e) => {
+        const estudiante = conferencistas.find(est => est._id === e.target.value);
         if (estudiante) {
             setNombreEstudiante(`${estudiante.nombre} ${estudiante.apellido} - ${estudiante.cedula}`);
-            setIdEstudiante(estudiante._id);
+            setIdConferencista(estudiante._id);
             setCedula(estudiante.cedula);
         }
     };
-    const agregarMateria = () => {
-        if (!materiaSeleccionada) {
-            Swal.fire({ icon: 'warning', title: 'Advertencia', text: 'Por favor, selecciona una materia.' });
+    const agregarAuditorio = () => {
+        if (!auditorioSeleccionado) {
+            Swal.fire({ icon: 'warning', title: 'Advertencia', text: 'Por favor, selecciona una auditorio.' });
             return;
         }
-        const materia = materiasDisponibles.find(mat => mat._id === materiaSeleccionada);
-        if (materia && !idMaterias.some(m => m._id === materia._id)) {
-            setIdMaterias([...idMaterias, materia]);
-            setTotalCreditos(prevTotal => prevTotal + materia.creditos);
+        const auditorio = auditoriosDisponibles.find(mat => mat._id === auditorioSeleccionado);
+        if (auditorio && !idAuditorio.some(m => m._id === auditorio._id)) {
+            setIdAuditorios([...idAuditorio, auditorio]);
         }
     };
-    const eliminarMateria = (id) => {
-        const materiaEliminada = idMaterias.find(m => m._id === id);
-        if (materiaEliminada) {
-            setIdMaterias(idMaterias.filter(m => m._id !== id));
-            setTotalCreditos(prevTotal => prevTotal - materiaEliminada.creditos);
+    const eliminarAuditorio = (id) => {
+        const auditorioEliminada = idAuditorio.find(m => m._id === id);
+        if (auditorioEliminada) {
+            setIdAuditorios(idAuditorio.filter(m => m._id !== id));
         }
     };
     const CrearenModulo3 = async (e) => {
         e.preventDefault();
-        if (!codigo || !descripcion || !idEstudiante || idMaterias.length === 0) {
-            Swal.fire({ icon: 'warning', title: 'Advertencia', text: 'Por favor, completa todos los campos y selecciona al menos una materia.' });
+        if (!codigo || !descripcion || !idConferencista || idAuditorio.length === 0) {
+            Swal.fire({ icon: 'warning', title: 'Advertencia', text: 'Por favor, completa todos los campos y selecciona al menos una auditorio.' });
             return;
         }
         try {
-            const nuevoDato = {codigo,descripcion,creditos: totalCreditos,  id_estudiante: idEstudiante,id_materias: idMaterias.map(m => m._id) };
+            const nuevoDato = {codigo,descripcion ,  id_estudiante: idConferencista,id_auditorios: idAuditorio.map(m => m._id) };
 
             await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutaCrearMatricula}`,nuevoDato,{
                 headers: {
@@ -124,10 +121,9 @@ const RegistrarModulo3 = () => {
         setDescripcion('');
         setCedula('');
         setNombreEstudiante('');
-        setIdEstudiante('');
-        setIdMaterias([]);
-        setTotalCreditos(0); 
-        setMateriaSeleccionada('');
+        setIdConferencista('');
+        setIdAuditorios([]);
+        setAuditorioSeleccionada('');
 
     };
 
@@ -148,13 +144,13 @@ const RegistrarModulo3 = () => {
                 <div className="row">
                     <div className="col-md-6 mb-3">
                         <label className="form-label">Estudiante</label>
-                        <input type="text" className="form-control" value={nombreEstudiante} readOnly />
+                        <input type="text" className="form-control" value={nombreConferencista} readOnly />
                     </div>
                     <div className="col-md-6 mb-3">
                         <label className="form-label">Seleccionar Conferencista</label>
-                        <select className="form-select" value={nombreEstudiante} onChange={seleccionarEstudiante}>
+                        <select className="form-select" value={nombreConferencista} onChange={seleccionarConferencista}>
                             <option value="">Seleccione un conferencista</option>
-                            {estudiantes.map(est => (
+                            {conferencistas.map(est => (
                                 <option key={est._id} value={est._id}>{est.nombre} {est.apellido} - {est.cedula}</option>
                             ))}
                         </select>
@@ -164,30 +160,30 @@ const RegistrarModulo3 = () => {
                     <div className="col-md-6 mb-3">
                         <label className="form-label">Seleccionar Auditorio</label>
                         <div className="d-flex">
-                            <select className="form-select me-2" value={materiaSeleccionada} onChange={(e) => setMateriaSeleccionada(e.target.value)}>
+                            <select className="form-select me-2" value={auditorioSeleccionado} onChange={(e) => setAuditorioSeleccionada(e.target.value)}>
                                 <option value="">Seleccione una auditorio</option>
-                                {materiasDisponibles.map(mat => (
-                                    <option key={mat._id} value={mat._id}>{mat.nombre} ({mat.codigo}) - {mat.creditos}</option>
+                                {auditoriosDisponibles.map(mat => (
+                                    <option key={mat._id} value={mat._id}>{mat.nombre} ({mat.codigo}) </option>
                                 ))}
                             </select>
-                            <button type="button" className="btn btn-success" onClick={agregarMateria}>Añadir Auditorio</button>
+                            <button type="button" className="btn btn-success" onClick={agregarAuditorio}>Añadir Auditorio</button>
                         </div>
 
                     </div>
                     <div className="col-md-6 mb-3">
                         <label className="form-label">Auditorios Seleccionados</label>
                         <ul className="list-group">
-                        {idMaterias.map((mat) => (
+                        {idAuditorio.map((mat) => (
                             <li key={mat._id} className="list-group-item d-flex justify-content-between align-items-center">
-                                {mat.nombre} ({mat.codigo}) - {mat.creditos}
-                                <button type="button" className="btn btn-danger btn-sm" onClick={() => eliminarMateria(mat._id)}>Eliminar</button>
+                                {mat.nombre} ({mat.codigo}) 
+                                <button type="button" className="btn btn-danger btn-sm" onClick={() => eliminarAuditorio(mat._id)}>Eliminar</button>
                             </li>
                         ))}
                         </ul>
                     </div>
                 </div>
                 <div className="d-flex justify-content-between mt-4">
-                    <button type="submit" className="btn btn-primary">Registrar Matrícula</button>
+                    <button type="submit" className="btn btn-primary">Registrar Reserva</button>
                     <button type="button" onClick={() => setMostrarModal(true)} className="btn btn-secondary">Ver {textos.modulo3titulo} Registradas</button>
 
                 </div>
@@ -196,7 +192,7 @@ const RegistrarModulo3 = () => {
                     <div className="modal-overlay">
                     <div className="modal-content">
                         <button className="btn-cerrar" onClick={() => setMostrarModal(false)}>X</button>
-                        <VerModulo3/> {/* Se muestra la lista de materias dentro del modal */}
+                        <VerModulo3/> {/* Se muestra la lista de auditorios dentro del modal */}
                     </div>
                     </div>
                 )}
