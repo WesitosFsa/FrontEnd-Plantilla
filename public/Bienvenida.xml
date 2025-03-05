@@ -5,15 +5,15 @@
     <boton>Haz clic aquí</boton>
     <boton1>Iniciar Sesion</boton1>
     <boton2>Registrarse</boton2>
-    <logintitulo>Bienvenido al Sistema de Ingreso</logintitulo>
+    <logintitulo>Bienvenido al sistema de gestion de reservas de auditorios</logintitulo>
     <logintexto>Esto es un Sistema para Reservar conferencias y registrar conferencistas</logintexto>
     <registrotitulo>Bienvenido al Registro de Usuarios</registrotitulo>
     <registrotexto>Esto es un Sistema para Reservar conferencias y registrar conferencistas</registrotexto>
-    <modulo1titulo>Conferencistas</modulo1titulo>
-    <modulo2titulo>Auditorios</modulo2titulo>
+    <modulo1titulo>Auditorios</modulo1titulo>
+    <modulo2titulo>Conferencistas</modulo2titulo>
     <modulo3titulo>Reservas</modulo3titulo>
-    <modulo1descripcion>En este sistema ingresa los conferencistas que iran al auditorio</modulo1descripcion>
-    <modulo2descripcion>En este sistema ingresa los auditorios que existen</modulo2descripcion>
+    <modulo1descripcion>En este sistema ingresa los auditorios que existen</modulo1descripcion>
+    <modulo2descripcion>En este sistema ingresa los conferencistas que iran al auditorio</modulo2descripcion>
     <modulo3descripcion>En este sistema ingresa las reservas que existen</modulo3descripcion>
     <MSGmod1Cexit>Materia añadida con Exito</MSGmod1Cexit>
     <MSGmod2Cexit>Descripcion Modulo3</MSGmod2Cexit>
@@ -21,7 +21,7 @@
     <MSGmod1Cfail>Error no se ha podido añadir la materia</MSGmod1Cfail>
     <MSGmod2Cfail>Descripcion Modulo3</MSGmod2Cfail>
     <MSGmod3Cfail>Descripcion Modulo3</MSGmod3Cfail>
-    <modulo1tituloEditar>Conferencista</modulo1tituloEditar>
-    <modulo2tituloEditar>Auditorio</modulo2tituloEditar>
+    <modulo1tituloEditar>Auditorio</modulo1tituloEditar>
+    <modulo2tituloEditar>Conferencista</modulo2tituloEditar>
     <modulo3tituloEditar>Reserva</modulo3tituloEditar>
 </contenido>
