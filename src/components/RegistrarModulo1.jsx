@@ -9,7 +9,7 @@ const RegistrarModulo1 = () => {
   const TOKEN = localStorage.getItem('token');
 
   const [textos, setTextos] = useState({});
-  const [codigo, setCodigo] = useState('');
+  const [cedula, setcedula] = useState('');
   const [nombre, setNombre] = useState('');
   const [ubicacion, setUbicacion] = useState('');
   const [capacidad, setCapacidad] = useState();
@@ -40,7 +40,7 @@ const RegistrarModulo1 = () => {
   const CrearenModulo1 = async (e) => {
     e.preventDefault();
     try {
-      const nuevoDato = { codigo, nombre, ubicacion, capacidad: Number(capacidad), descripcion };
+      const nuevoDato = { cedula, nombre, ubicacion, capacidad: Number(capacidad), descripcion };
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}${rutacrearModulo1}`, nuevoDato ,{
         headers: {
           Authorization: `Bearer ${TOKEN}`,
@@ -55,7 +55,7 @@ const RegistrarModulo1 = () => {
   };
   const limpiarFormulario = () => {
     setNombre('');
-    setCodigo('');
+    setcedula('');
     setDescripcion('');
     setCapacidad('');
     setUbicacion('');
@@ -73,8 +73,8 @@ const RegistrarModulo1 = () => {
             <input
               type="text"
               className="form-control"
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value)}
+              value={cedula}
+              onChange={(e) => setcedula(e.target.value)}
               required
             />
           </div>
